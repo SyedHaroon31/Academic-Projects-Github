@@ -1,0 +1,457 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package userinterface.Government.Mayor;
+
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.GovernmentEnterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.Enterprise.RemoteClinicEnterprise;
+import Business.Order.OrderItem;
+import Business.Organization.Organization;
+import Business.Organization.TreasurerOrganization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.InitiateFundRequest;
+import Business.WorkQueue.LabRequestEquipment;
+import Business.WorkQueue.TravelFundRequest;
+import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import utility.Constants;
+
+/**
+ *
+ * @author Ashish
+ */
+public class MayorProcessFundRequestJPanel extends javax.swing.JPanel {
+
+    JPanel userProcessContainer;
+    EnterpriseDirectory ed;
+    UserAccount account;
+    WorkRequest request;
+    public MayorProcessFundRequestJPanel(JPanel userProcessContainer,EnterpriseDirectory ed,UserAccount account,WorkRequest request ) {
+        initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.ed=ed; 
+        this.account=account;
+        this.request=request;
+        populateRequestDetailsTable();        
+      if(request instanceof LabRequestEquipment)
+        {
+            lblTotal.setText(String.valueOf(((LabRequestEquipment)request).getOrderPrice()));
+        }
+        else{lblTotal.setText(String.valueOf(((TravelFundRequest)request).getTotal()));}    }
+    public void populateRequestDetailsTable()
+    {
+        if(request instanceof LabRequestEquipment)
+        {
+            lblTotal.setText(String.valueOf(((LabRequestEquipment)request).getOrderPrice()));
+            SimpleDateFormat dtFormat =  new SimpleDateFormat ("MM/dd/yyyy");
+            lblOrder.setText(String.valueOf(((LabRequestEquipment)request).getOrder().getOrderNum()));
+            lblResolved.setText(request.getResolveDate()==null?"--":dtFormat.format(request.getResolveDate()));
+            lblReciever.setText(request.getReceiver()==null?"--":String.valueOf(request.getReceiver()));
+            lblSender.setText(request.getSender()==null?"--":String.valueOf(request.getSender()));
+            lblReqDate.setText(request.getRequestDate()==null?"--":dtFormat.format(request.getRequestDate()));
+            if(request.getStatus() == Constants.Status.Processing_M)
+            {
+                txtareply.setEnabled(true);
+            }
+            else{txtareply.setEnabled(false);}
+            DefaultTableModel model = (DefaultTableModel) orderTable.getModel();   
+            model.setRowCount(0);
+            for (OrderItem oi : ((LabRequestEquipment)request).getOrder().getOrderItemList())
+            {
+                Object[] row = new Object[4];
+                row[0] = oi;
+                row[1] = oi.getQuantity();
+                row[2] = oi.getQuantity()*oi.getProduct().getProductPrice();
+                row[3] = request.getStatus() == null ? "--" : request.getStatus();
+
+                model.addRow(row);            
+            }
+        }
+        else
+        {
+            lblTotal.setText(String.valueOf(((TravelFundRequest)request).getTotal()));
+            SimpleDateFormat dtFormat =  new SimpleDateFormat ("MM/dd/yyyy");
+            lblOrder.setVisible(false);
+            lblResolved.setText(request.getResolveDate()==null?"--":dtFormat.format(request.getResolveDate()));
+            lblReciever.setText(request.getReceiver()==null?"--":String.valueOf(request.getReceiver()));
+            lblSender.setText(request.getSender()==null?"--":String.valueOf(request.getSender()));
+            lblReqDate.setText(request.getRequestDate()==null?"--":dtFormat.format(request.getRequestDate()));
+            if(request.getStatus()==Constants.Status.Processing)
+            {
+                txtareply.setEnabled(true);
+            }else
+            {
+                txtareply.setEnabled(false);
+            }
+            
+            DefaultTableModel model = (DefaultTableModel) orderTable.getModel();   
+            model.setRowCount(0);
+            Object[] row = new Object[4];
+            row[0] = request;
+            row[1] = "NA";
+            row[2] = ((TravelFundRequest)request).getTotal();
+            row[3] = request.getStatus() == null ? "--" : request.getStatus();
+
+            model.addRow(row);            
+            
+        }
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblOrder = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        orderTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        lblReqDate = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblSender = new javax.swing.JLabel();
+        lblReciever = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtareply = new javax.swing.JTextArea();
+        btnDecline = new javax.swing.JButton();
+        btnInitiateTransfer = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        lblResolved = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(44, 62, 80));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setText("Request Id:");
+
+        lblOrder.setText("<< Order No >>");
+
+        orderTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Quantity", "Price", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(orderTable);
+
+        jLabel3.setText("Request Date:");
+
+        lblReqDate.setText("<<  Date >>");
+
+        jLabel4.setText("Sender:");
+
+        jLabel5.setText("Reciever:");
+
+        lblSender.setText("<<Sender>>");
+
+        lblReciever.setText("<<Reciever>>");
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Reply:");
+
+        txtareply.setColumns(20);
+        txtareply.setRows(5);
+        jScrollPane2.setViewportView(txtareply);
+
+        btnDecline.setText("Decline");
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeclineActionPerformed(evt);
+            }
+        });
+
+        btnInitiateTransfer.setText("Initiate Fund Transfer");
+        btnInitiateTransfer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInitiateTransferActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Resolved On:");
+
+        lblResolved.setText("<<Resolved On>>");
+
+        jLabel10.setText("Total Order Price:");
+
+        lblTotal.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblTotal.setText("<<Total>>");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblResolved)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnInitiateTransfer))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSender)
+                                    .addComponent(lblReciever))
+                                .addGap(128, 128, 128)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(63, 63, 63)
+                                        .addComponent(lblTotal))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblOrder)
+                                .addGap(315, 315, 315)
+                                .addComponent(jLabel3)
+                                .addGap(6, 6, 6)
+                                .addComponent(lblReqDate))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(lblOrder)
+                            .addComponent(jLabel3)
+                            .addComponent(lblReqDate))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSender)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblReciever)
+                            .addComponent(jLabel5)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTotal)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(lblResolved))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnDecline)
+                    .addComponent(btnInitiateTransfer))
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
+        jLabel1.setText("Process Request");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
+        if(request.getStatus()==Constants.Status.Processing_M)
+        {
+            int r=JOptionPane.showConfirmDialog(null, "Are you sure you want to save your decision?", "Alert", JOptionPane.YES_NO_OPTION);
+            if(r==JOptionPane.YES_OPTION)
+            {
+                JOptionPane.showMessageDialog(null, " Request Declined", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }            
+            
+            if(request instanceof LabRequestEquipment)
+            {
+                ((LabRequestEquipment)request).setReply(txtareply.getText());
+            }else
+            {((TravelFundRequest)request).setResult(txtareply.getText());}
+            request.getTrail().updateTrail(Constants.Status.Declined, null,null);
+            request.setResolveDate(new Date());
+            request.setStatus(Constants.Status.Declined);
+            txtareply.setEnabled(false);
+            populateRequestDetailsTable();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Request not pending", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeclineActionPerformed
+
+    private void btnInitiateTransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitiateTransferActionPerformed
+
+            int r=JOptionPane.showConfirmDialog(null, "Are you sure you want to save your decision?", "Alert", JOptionPane.YES_NO_OPTION);
+            if(r==JOptionPane.YES_OPTION)
+            {
+                JOptionPane.showMessageDialog(null, " Request Approved", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else{return;}
+            
+            Organization org = null;
+            Enterprise e=null;
+            for(Enterprise en : ed.getEnterpriseList())
+            {
+                if(en instanceof GovernmentEnterprise)
+                {
+                    e=en;
+                    break;
+                }
+            }
+            for (Organization organization : e.getOrganizationDirectory().getOrganizationList()){
+                if (organization instanceof TreasurerOrganization){
+                    org = organization;
+                    break;
+                }
+            }
+            if (org!=null){
+                InitiateFundRequest req=new InitiateFundRequest();
+                if(request instanceof LabRequestEquipment)
+                {
+                    ((LabRequestEquipment)request).setSender(account);
+                    req.setRequestedFunds(((LabRequestEquipment)request).getOrderPrice());
+                    for(Enterprise en : ed.getEnterpriseList())
+                    {
+                        if(en instanceof HospitalEnterprise)
+                        {
+                            e=en;
+                            break;
+                        }
+                    }                    
+                }
+                else
+                {
+                    ((TravelFundRequest)request).setSender(account);
+                    req.setRequestedFunds(((TravelFundRequest)request).getTotal());
+                    for(Enterprise en : ed.getEnterpriseList())
+                    {
+                        if(en instanceof RemoteClinicEnterprise)
+                        {
+                            e=en;
+                            break;
+                        }
+                    }                          
+                }
+
+                req.setRequestedFor(e);
+                request.getTrail().addTrail(Constants.Status.Forwarded_M, account,Constants.TrailLevel.Level4);
+                request.setStatus(Constants.Status.Forwarded_M);
+                req.setStatus(Constants.Status.Forwarded_M);
+                txtareply.setEnabled(false);
+                req.setTrail(request.getTrail());
+                ((TreasurerOrganization)org).getFundReqIniQueue().getWorkRequestList().add(req);
+                account.getWorkQueue().getWorkRequestList().add(request);
+            }
+            populateRequestDetailsTable();
+            JOptionPane.showMessageDialog(null, "Fund Request Approved, and marked for initiation!", "Warning", JOptionPane.WARNING_MESSAGE);
+
+    }//GEN-LAST:event_btnInitiateTransferActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDecline;
+    private javax.swing.JButton btnInitiateTransfer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblOrder;
+    private javax.swing.JLabel lblReciever;
+    private javax.swing.JLabel lblReqDate;
+    private javax.swing.JLabel lblResolved;
+    private javax.swing.JLabel lblSender;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable orderTable;
+    private javax.swing.JTextArea txtareply;
+    // End of variables declaration//GEN-END:variables
+}

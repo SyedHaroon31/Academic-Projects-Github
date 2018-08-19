@@ -1,0 +1,441 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package userinterface.Government.Mayor;
+
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.GovernmentEnterprise;
+import Business.Organization.MayorOrganization;
+import Business.Organization.Organization;
+import Business.Organization.TreasurerOrganization;
+import Business.Product.Product;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.InitiateFundRequest;
+import Business.WorkQueue.LabRequestEquipment;
+import Business.WorkQueue.WorkRequest;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import utility.Constants;
+
+/**
+ *
+ * @author Ashish
+ */
+public class MayorFundAllocationJPanel extends javax.swing.JPanel {
+
+    private JPanel userProcessContainer;
+    private UserAccount account;
+    private MayorOrganization mo;
+    private EnterpriseDirectory ed;
+    public MayorFundAllocationJPanel(JPanel userProcessContainer, UserAccount account, MayorOrganization mo, EnterpriseDirectory ed) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account=account;
+        this.mo=mo;
+        this.ed=ed;
+        populateFundsTbl(); 
+        populateRequestTbl();
+        fillDeptCombo();
+        lblFund.setText(String.valueOf(mo.getTotalFunds()));
+        DefaultPieDataset data = new DefaultPieDataset();
+        data.setValue("Mayor Office", mo.getTotalFunds());
+        for(Enterprise e:ed.getEnterpriseList())
+        {
+            if(!(e instanceof GovernmentEnterprise))
+            {
+                data.setValue(e.getName(), e.getTotalFunds());
+            }
+        }
+        //data.setValue("Category 2", 27.9);
+        //data.setValue("Category 3", 79.5);
+        // create a chart...
+        JFreeChart chart = ChartFactory.createPieChart(
+        "Fund Allocation Chart",
+        data,
+        true, // legend?
+        true, // tooltips?
+        false // URLs?
+        );
+        chartPanel.setLayout(new java.awt.BorderLayout());
+        ChartPanel CP = new ChartPanel(chart);
+        chartPanel.add(CP,BorderLayout.CENTER);
+        chartPanel.validate();
+    }
+public void populateFundsTbl()
+{
+        DefaultTableModel model = (DefaultTableModel) tblFunds.getModel();
+        SimpleDateFormat dtFormat =  new SimpleDateFormat ("MM/dd/yyyy");
+        model.setRowCount(0); 
+        for (Enterprise e : ed.getEnterpriseList()) 
+        {
+            if(!(e instanceof GovernmentEnterprise))
+            {
+                Object[] row = new Object[3];
+                row[0] = e;
+                row[1] = e.getTotalFunds();
+                row[2] = e.getLastAllocation()==null?"NA":dtFormat.format(e.getLastAllocation());            
+                model.addRow(row);                
+            }
+        }               
+}
+public void populateRequestTbl()
+{
+        DefaultTableModel model = (DefaultTableModel) tblRequest.getModel();
+        SimpleDateFormat dtFormat =  new SimpleDateFormat ("MM/dd/yyyy");
+        model.setRowCount(0); 
+        for (WorkRequest request : account.getWorkQueue().getWorkRequestList()) 
+        {
+            if(request.getReqType().equals(Constants.ReqType.InitTransfer.toString()))
+            {
+            Object[] row = new Object[4];
+            row[0] = request.getRequestedFor().getName();
+            row[1] = ((InitiateFundRequest)request).getRequestedFunds();
+            row[2] = request.getTrail().getRequestDate(Constants.TrailLevel.Level4)==null?"--":dtFormat.format(request.getTrail().getRequestDate(Constants.TrailLevel.Level4));
+            row[3] = request.getStatus() == Constants.Status.Forwarded_M ? "Pending" : request.getStatus();            
+            model.addRow(row);                
+            }
+        }       
+        
+}
+public void fillDeptCombo()
+{
+        Enterprise[] eArr=new Enterprise[ed.getEnterpriseList().size()];
+        int i=0;
+        for(Enterprise e:ed.getEnterpriseList())
+        {
+            if(!(e instanceof GovernmentEnterprise))
+            {
+                eArr[i]=e;
+                i++;
+            }
+        }        
+        comboDept.setModel(new javax.swing.DefaultComboBoxModel(eArr));
+        comboDept.setSelectedIndex(0);    
+}
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblFunds = new javax.swing.JTable();
+        comboDept = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        fundTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lblFund = new javax.swing.JLabel();
+        btnIni = new javax.swing.JButton();
+        chartPanel = new javax.swing.JPanel();
+        backJButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblRequest = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnRefDeptStatus = new javax.swing.JButton();
+        btnRefStatus = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(44, 62, 80));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
+        jLabel1.setText("Fund Allocation");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblFunds.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Department", "Funds", "Last Allocation"
+            }
+        ));
+        jScrollPane1.setViewportView(tblFunds);
+
+        comboDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Department:");
+
+        jLabel3.setText("Enter Funds:");
+
+        fundTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fundTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel4.setText("Funds Left:");
+
+        lblFund.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblFund.setText("<<Fund>>");
+
+        btnIni.setText("Initiate");
+        btnIni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniActionPerformed(evt);
+            }
+        });
+
+        chartPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
+        chartPanel.setLayout(chartPanelLayout);
+        chartPanelLayout.setHorizontalGroup(
+            chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+        chartPanelLayout.setVerticalGroup(
+            chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
+        tblRequest.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Department", "Requested Funds", "Requested On", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblRequest);
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel5.setText("Department Status");
+
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel6.setText("Request Status");
+
+        btnRefDeptStatus.setText("Refresh");
+        btnRefDeptStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefDeptStatusActionPerformed(evt);
+            }
+        });
+
+        btnRefStatus.setText("Refresh");
+        btnRefStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefStatusActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(comboDept, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnIni)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(backJButton))
+                                .addComponent(fundTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFund)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRefStatus)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRefDeptStatus)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRefDeptStatus)
+                            .addComponent(btnRefStatus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblFund))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(comboDept, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(fundTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnIni)
+                            .addComponent(backJButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniActionPerformed
+            int r=JOptionPane.showConfirmDialog(null, "Are you sure you want to initiate allocation?", "Alert", JOptionPane.YES_NO_OPTION);
+            if(r==JOptionPane.YES_OPTION)
+            {
+                JOptionPane.showMessageDialog(null, " Allocation Initiated", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else{return;}
+            
+            Organization org = null;
+            Enterprise e=null;
+            for(Enterprise en : ed.getEnterpriseList())
+            {
+                if(en instanceof GovernmentEnterprise)
+                {
+                    e=en;
+                    break;
+                }
+            }
+            for (Organization organization : e.getOrganizationDirectory().getOrganizationList()){
+                if (organization instanceof TreasurerOrganization){
+                    org = organization;
+                    break;
+                }
+            }
+            if (org!=null){
+                InitiateFundRequest request = new InitiateFundRequest();
+                request.setSender(account);
+                request.getTrail().addTrail(Constants.Status.Forwarded_M, account, Constants.TrailLevel.Level4);
+                request.setStatus(Constants.Status.Forwarded_M);
+                request.setReqType(utility.Constants.ReqType.InitTransfer.toString());
+                request.setRequestedFunds(Long.parseLong(fundTxt.getText()));
+                request.setRequestedFor(((Enterprise)comboDept.getSelectedItem()));
+                ((TreasurerOrganization)org).getFundReqIniQueue().getWorkRequestList().add(request);
+                account.getWorkQueue().getWorkRequestList().add(request);
+                populateRequestTbl();
+            }
+    }//GEN-LAST:event_btnIniActionPerformed
+
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
+    private void btnRefStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefStatusActionPerformed
+        populateRequestTbl();
+    }//GEN-LAST:event_btnRefStatusActionPerformed
+
+    private void btnRefDeptStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefDeptStatusActionPerformed
+        populateFundsTbl();
+    }//GEN-LAST:event_btnRefDeptStatusActionPerformed
+
+    private void fundTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fundTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fundTxtActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
+    private javax.swing.JButton btnIni;
+    private javax.swing.JButton btnRefDeptStatus;
+    private javax.swing.JButton btnRefStatus;
+    private javax.swing.JPanel chartPanel;
+    private javax.swing.JComboBox<String> comboDept;
+    private javax.swing.JTextField fundTxt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFund;
+    private javax.swing.JTable tblFunds;
+    private javax.swing.JTable tblRequest;
+    // End of variables declaration//GEN-END:variables
+}
