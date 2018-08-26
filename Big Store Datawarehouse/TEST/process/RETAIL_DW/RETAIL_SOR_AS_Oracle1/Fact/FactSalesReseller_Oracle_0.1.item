@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Default" jobType="Standard" xmi:version="2.0">
   <context confirmationNeeded="false" name="Default"/>
   <parameters>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="64"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" show="false" value="{&quot;JOB_RUN_VM_ARGUMENTS&quot;:[&quot;-Xms10G&quot;,&quot;-Xmx15G&quot;]}"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" show="false" value="true"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="96"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" show="false" value=""/>
     <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" show="false" value=""/>
@@ -112,7 +114,7 @@
     <routinesParameter id="_kZFCwGnqEeiNs9TsG9ixDw" name="TalendStringUtil"/>
     <routinesParameter id="_kYoW1mnqEeiNs9TsG9ixDw" name="TalendString"/>
   </parameters>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="96">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_11"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -133,7 +135,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESDATE, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.STOREID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.PRODUCT_ID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.PROMOTIONID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESQUANTITY, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.RETURNQUANTITY, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESAMOUNT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.RETURNAMOUNT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.DISCOUNTAMOUNT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.DISCOUNTPCT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.TOTALCOST, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.LOADDATE, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.UPDATEDATE&#10;FROM RETAIL_SOR_AS.FACTRESELLERSALES&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESDATE, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.STOREID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.PRODUCT_ID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.PROMOTIONID, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESQUANTITY, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.RETURNQUANTITY, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.SALESAMOUNT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.RETURNAMOUNT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.DISCOUNTAMOUNT, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.TOTALCOST, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.LOADDATE, &#10;  RETAIL_SOR_AS.FACTRESELLERSALES.UPDATEDATE&#10;FROM RETAIL_SOR_AS.FACTRESELLERSALES&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -168,8 +170,6 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="DISCOUNTAMOUNT"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DISCOUNTPCT"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="TOTALCOST"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="LOADDATE"/>
@@ -180,52 +180,23 @@
     <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
     <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="FACTRESELLERSALES" name="tDBInput_11">
-      <column comment="" key="true" length="10" name="SALESID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SALESDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="STOREID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="24" name="PRODUCT_ID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="PROMOTIONID" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="SALESQUANTITY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="RETURNQUANTITY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="15" name="SALESAMOUNT" nullable="false" pattern="" precision="2" sourceType="NUMBER" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="15" name="RETURNAMOUNT" nullable="true" pattern="" precision="2" sourceType="NUMBER" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="15" name="DISCOUNTAMOUNT" nullable="true" pattern="" precision="2" sourceType="NUMBER" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="DISCOUNTPCT" nullable="true" pattern="" precision="4" sourceType="NUMBER" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="15" name="TOTALCOST" nullable="true" pattern="" precision="2" sourceType="NUMBER" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="11" name="LOADDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="11" name="UPDATEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
+    <metadata connector="FLOW" name="tDBInput_11">
+      <column comment="" defaultValue="" key="false" length="10" name="SALESID" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="DEC" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="SALESDATE" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="10" name="STOREID" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="DEC" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="24" name="PRODUCT_ID" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="10" name="PROMOTIONID" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="DEC" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="10" name="SALESQUANTITY" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="DEC" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="10" name="RETURNQUANTITY" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="DEC" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="15" name="SALESAMOUNT" nullable="false" originalLength="-1" pattern="" precision="2" sourceType="DEC" type="id_Double" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="15" name="RETURNAMOUNT" nullable="true" originalLength="-1" pattern="" precision="2" sourceType="DEC" type="id_Double" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="15" name="DISCOUNTAMOUNT" nullable="true" originalLength="-1" pattern="" precision="2" sourceType="DEC" type="id_Double" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="15" name="TOTALCOST" nullable="true" originalLength="-1" pattern="" precision="2" sourceType="DEC" type="id_Double" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="LOADDATE" nullable="true" originalLength="-1" pattern="" precision="6" sourceType="DATE" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="0" name="UPDATEDATE" nullable="true" originalLength="-1" pattern="" precision="6" sourceType="DATE" type="id_Date" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="832" posY="96">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="832" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -420,10 +391,10 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables minimized="true" name="FactResellerSales_Oracle_Output" sizeState="INTERMEDIATE">
+      <outputTables name="FactResellerSales_Oracle_Output" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="((Relational.ISNULL(ResellerSales_Oracle.SALESDATE)) ?99: &#13;&#10;&#13;&#10;Integer.parseInt(routines.TalendDate.formatDate(&quot;yyyyMMdd&quot;,ResellerSales_Oracle.SALESDATE))&#13;&#10; ) " name="SALESDATESK" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.SALESDATE" name="SALESDATE" type="id_Date"/>
-        <mapperTableEntries expression="9" name="CHANNELSK" type="id_Integer"/>
+        <mapperTableEntries expression="4" name="CHANNELSK" type="id_Integer"/>
         <mapperTableEntries expression="DimStore_Oracle.STORESK" name="STORESK" type="id_Integer"/>
         <mapperTableEntries expression="DimProduct_Oracle.PRODUCTSK" name="PRODUCTSK" type="id_Integer"/>
         <mapperTableEntries expression="DimPromotion_Oracle.PROMOTIONSK" name="PROMOTIONSK" type="id_Integer"/>
@@ -434,12 +405,12 @@
         <mapperTableEntries expression="(Relational.ISNULL(FactExchangeRate_Oracle.ENDOFDAYRATE) || FactExchangeRate_Oracle.ENDOFDAYRATE == 0 )? -10.00 :&#13;&#10;(ResellerSales_Oracle.RETURNAMOUNT/FactExchangeRate_Oracle.ENDOFDAYRATE) " name="RETURNAMOUNT" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="(Relational.ISNULL(FactExchangeRate_Oracle.ENDOFDAYRATE) || FactExchangeRate_Oracle.ENDOFDAYRATE == 0 )? -10.00 :&#13;&#10;(ResellerSales_Oracle.DISCOUNTAMOUNT/FactExchangeRate_Oracle.ENDOFDAYRATE) " name="DISCOUNTAMOUNT" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="(Relational.ISNULL(FactExchangeRate_Oracle.ENDOFDAYRATE) || FactExchangeRate_Oracle.ENDOFDAYRATE == 0 )? -10.00 :&#13;&#10;(ResellerSales_Oracle.TOTALCOST/FactExchangeRate_Oracle.ENDOFDAYRATE) " name="TOTALCOST" nullable="true" type="id_Double"/>
-        <mapperTableEntries expression="DimCurrency_Oracle.CURRENCYSK " name="LOCAL_CURRENCYSK" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="23" name="LOCAL_CURRENCYSK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.SALESAMOUNT" name="SALESAMOUNT_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="ResellerSales_Oracle.RETURNAMOUNT" name="RETURNAMOUNT_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="ResellerSales_Oracle.DISCOUNTAMOUNT" name="DISCOUNTAMOUNT_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="ResellerSales_Oracle.TOTALCOST" name="TOTALCOST_LOCAL" nullable="true" type="id_Double"/>
-        <mapperTableEntries expression="1" name="SOR_ID" type="id_Integer"/>
+        <mapperTableEntries expression="116" name="SOR_ID" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.LOADDATE " name="SOR_LOADDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="ResellerSales_Oracle.UPDATEDATE " name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="context.getProperty(&quot;vChildPID&quot;)" name="DI_JOBID" type="id_String"/>
@@ -449,7 +420,7 @@
       <outputTables activateCondensedTool="true" name="FactResellerSales_Rejects_Oracle_Output" rejectInnerJoin="true" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="((Relational.ISNULL(ResellerSales_Oracle.SALESDATE)) ?99: &#13;&#10;&#13;&#10;Integer.parseInt(routines.TalendDate.formatDate(&quot;yyyyMMdd&quot;,ResellerSales_Oracle.SALESDATE))&#13;&#10; ) " name="SALESDATESK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.SALESDATE" name="SALESDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="9" name="CHANNELSK" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="4" name="CHANNELSK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="DimStore_Oracle.STORESK" name="STORESK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="DimProduct_Oracle.PRODUCTSK" name="PRODUCTSK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="DimPromotion_Oracle.PROMOTIONSK" name="PROMOTIONSK" nullable="true" type="id_Integer"/>
@@ -460,12 +431,12 @@
         <mapperTableEntries expression="(Relational.ISNULL(FactExchangeRate_Oracle.ENDOFDAYRATE) || FactExchangeRate_Oracle.ENDOFDAYRATE == 0 )? -10.00 :&#13;&#10;(ResellerSales_Oracle.RETURNAMOUNT/FactExchangeRate_Oracle.ENDOFDAYRATE) " name="RETURNAMOUNT" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="(Relational.ISNULL(FactExchangeRate_Oracle.ENDOFDAYRATE) || FactExchangeRate_Oracle.ENDOFDAYRATE == 0 )? -10.00 :&#13;&#10;(ResellerSales_Oracle.DISCOUNTAMOUNT/FactExchangeRate_Oracle.ENDOFDAYRATE) " name="DISCOUNTAMOUNT" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="(Relational.ISNULL(FactExchangeRate_Oracle.ENDOFDAYRATE) || FactExchangeRate_Oracle.ENDOFDAYRATE == 0 )? -10.00 :&#13;&#10;(ResellerSales_Oracle.TOTALCOST/FactExchangeRate_Oracle.ENDOFDAYRATE) " name="TOTALCOST" nullable="true" type="id_Double"/>
-        <mapperTableEntries expression="DimCurrency_Oracle.CURRENCYSK" name="LOCAL_CURRENCYSK" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="23" name="LOCAL_CURRENCYSK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.SALESAMOUNT" name="SALESAMOUNT_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="ResellerSales_Oracle.RETURNAMOUNT" name="RETURNAMOUNT_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="ResellerSales_Oracle.DISCOUNTAMOUNT" name="DISCOUNTAMOUNT_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="ResellerSales_Oracle.TOTALCOST" name="TOTALCOST_LOCAL" nullable="true" type="id_Double"/>
-        <mapperTableEntries expression="10" name="DI_REJECT_CODE" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="((DimProduct_Oracle.PRODUCTSK == 0 | Relational.ISNULL(DimProduct_Oracle.PRODUCTSK)) ?30:&#13;&#10;( &#13;&#10;&#9;(DimStore_Oracle.STORESK == 0 | Relational.ISNULL(DimStore_Oracle.STORESK)) ?20: 99&#13;&#10;&#9;&#9;&#13;&#10;)&#13;&#10;) " name="DI_REJECT_CODE" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.SALESID" name="SALESID" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="4" name="CHANNELKEY" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.STOREID" name="STOREID" nullable="true" type="id_Integer"/>
@@ -474,13 +445,13 @@
         <mapperTableEntries expression="ResellerSales_Oracle.PRODUCT_ID" name="PRODUCT_ID" nullable="true" type="id_String"/>
         <mapperTableEntries expression="ResellerSales_Oracle.PROMOTIONID" name="PROMOTIONID" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="DimPromotion_Oracle.PROMOTIONLABEL" name="PROMOTIONLABEL" nullable="true" type="id_String"/>
-        <mapperTableEntries name="GEOGRAPHYID" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="DimStore_Oracle.SOR_ID" name="SOR_ID" type="id_Integer"/>
-        <mapperTableEntries expression="DimStore_Oracle.SOR_LOADDATE" name="SOR_LOADDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="DimStore_Oracle.SOR_UPDATEDATE" name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries expression="DimStore_Oracle.DI_JOBID" name="DI_JOBID" type="id_String"/>
-        <mapperTableEntries expression="DimStore_Oracle.DI_CREATEDATE" name="DI_CREATEDATE" type="id_Date"/>
-        <mapperTableEntries expression="DimStore_Oracle.DI_MODIFIEDDATE" name="DI_MODIFIEDDATE" type="id_Date"/>
+        <mapperTableEntries expression="DimGeography.GEOGRAPHYKEY " name="GEOGRAPHYID" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="116" name="SOR_ID" type="id_Integer"/>
+        <mapperTableEntries expression="ResellerSales_Oracle.LOADDATE " name="SOR_LOADDATE" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="ResellerSales_Oracle.UPDATEDATE " name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
+        <mapperTableEntries expression="context.getProperty(&quot;vChildPID&quot;)" name="DI_JOBID" type="id_String"/>
+        <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_CREATEDATE" type="id_Date"/>
+        <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_MODIFIEDDATE" type="id_Date"/>
       </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="ResellerSales_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries name="SALESID" type="id_Integer"/>
@@ -493,136 +464,41 @@
         <mapperTableEntries name="SALESAMOUNT" type="id_Double"/>
         <mapperTableEntries name="RETURNAMOUNT" nullable="true" type="id_Double"/>
         <mapperTableEntries name="DISCOUNTAMOUNT" nullable="true" type="id_Double"/>
-        <mapperTableEntries name="DISCOUNTPCT" nullable="true" type="id_Double"/>
         <mapperTableEntries name="TOTALCOST" nullable="true" type="id_Double"/>
         <mapperTableEntries name="LOADDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries name="UPDATEDATE" nullable="true" type="id_Date"/>
       </inputTables>
+      <inputTables innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DimProduct_Oracle" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="" name="PRODUCTSK" type="id_Integer"/>
+        <mapperTableEntries expression="StringHandling.RIGHT(ResellerSales_Oracle.PRODUCT_ID,7) " name="PRODUCT_ID" operator="=" type="id_String"/>
+        <mapperTableEntries expression="" name="BRAND_ID" type="id_String"/>
+        <mapperTableEntries name="PRODUCTLABEL" type="id_String"/>
+      </inputTables>
       <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimStore_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries name="STORESK" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.STOREID " name="STOREID" operator="=" type="id_Integer"/>
-        <mapperTableEntries name="STOREKEY" type="id_Integer"/>
-        <mapperTableEntries name="SALESTERRITORYSK" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="STOREMANAGER" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="STORETYPE" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STORENAME" type="id_String"/>
-        <mapperTableEntries name="STOREDESCRIPTION" type="id_String"/>
-        <mapperTableEntries name="STATUS" type="id_String"/>
-        <mapperTableEntries name="OPENDATE" type="id_Date"/>
-        <mapperTableEntries name="CLOSEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="ENTITYKEY" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="ZIPCODE" nullable="true" type="id_String"/>
-        <mapperTableEntries name="ZIPCODEEXTENSION" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STOREPHONE" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STOREFAX" nullable="true" type="id_String"/>
-        <mapperTableEntries name="ADDRESSLINE1" nullable="true" type="id_String"/>
-        <mapperTableEntries name="ADDRESSLINE2" nullable="true" type="id_String"/>
         <mapperTableEntries name="GEOGRAPHYSK" type="id_Integer"/>
-        <mapperTableEntries name="CLOSEREASON" nullable="true" type="id_String"/>
-        <mapperTableEntries name="EMPLOYEECOUNT" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="SELLINGAREASIZE" nullable="true" type="id_Double"/>
-        <mapperTableEntries name="LASTREMODELDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="SOR_ID" type="id_Integer"/>
-        <mapperTableEntries name="SOR_LOADDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="DI_JOBID" type="id_String"/>
-        <mapperTableEntries name="DI_CREATEDATE" type="id_Date"/>
-        <mapperTableEntries name="DI_MODIFIEDDATE" type="id_Date"/>
-      </inputTables>
-      <inputTables innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimProduct_Oracle" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="PRODUCTSK" type="id_Integer"/>
-        <mapperTableEntries name="PRODUCTKEY" type="id_Integer"/>
-        <mapperTableEntries expression="StringHandling.RIGHT(ResellerSales_Oracle.PRODUCT_ID,7) " name="PRODUCT_ID" operator="=" type="id_String"/>
-        <mapperTableEntries name="BRAND_ID" type="id_String"/>
-        <mapperTableEntries name="PRODUCTLABEL" type="id_String"/>
-        <mapperTableEntries name="PRODUCTNAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PRODUCTDESCRIPTION" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PRODUCTSUBCATEGORYKEY" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="PRODUCTSUBCATEGORYLABEL" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PRODUCTSUBCATEGORYNAME" type="id_String"/>
-        <mapperTableEntries name="PRODUCTSUBCATEGORYDESCRIPTION" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PRODUCTCATEGORYKEY" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="PRODUCTCATEGORYLABEL" type="id_String"/>
-        <mapperTableEntries name="PRODUCTCATEGORYNAME" type="id_String"/>
-        <mapperTableEntries name="PRODUCTCATEGORYDESCRIPTION" type="id_String"/>
-        <mapperTableEntries name="MANUFACTURER" nullable="true" type="id_String"/>
-        <mapperTableEntries name="BRANDNAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="CLASSID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="CLASSNAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STYLEID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STYLENAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="COLORID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="COLORNAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PRODUCTSIZE" nullable="true" type="id_String"/>
-        <mapperTableEntries name="SIZERANGE" nullable="true" type="id_String"/>
-        <mapperTableEntries name="SIZEUNITMEASUREID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="WEIGHT" nullable="true" type="id_Double"/>
-        <mapperTableEntries name="WEIGHTUNITMEASUREID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="UNITOFMEASUREID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="UNITOFMEASURENAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STOCKTYPEID" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STOCKTYPENAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="AVAILABLEFORSALEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="STOPSALEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="STATUS" nullable="true" type="id_String"/>
-        <mapperTableEntries name="SOR_ID" type="id_Integer"/>
-        <mapperTableEntries name="SOR_LOADDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="DI_JOBID" type="id_String"/>
-        <mapperTableEntries name="DI_CREATEDATE" type="id_Date"/>
-        <mapperTableEntries name="DI_MODIFIEDDATE" type="id_Date"/>
       </inputTables>
       <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimPromotion_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries name="PROMOTIONSK" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.PROMOTIONID " name="PROMOTIONID" type="id_Integer"/>
-        <mapperTableEntries name="PROMOTIONKEY" type="id_Integer"/>
         <mapperTableEntries name="PROMOTIONLABEL" type="id_String"/>
-        <mapperTableEntries name="PROMOTIONNAME" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PROMOTIONDESCRIPTION" nullable="true" type="id_String"/>
-        <mapperTableEntries name="DISCOUNTPERCENT" nullable="true" type="id_Double"/>
-        <mapperTableEntries name="PROMOTIONTYPE" nullable="true" type="id_String"/>
-        <mapperTableEntries name="PROMOTIONCATEGORY" nullable="true" type="id_String"/>
-        <mapperTableEntries name="STARTDATE" type="id_Date"/>
-        <mapperTableEntries name="ENDDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="MINQUANTITY" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="MAXQUANTITY" nullable="true" type="id_Integer"/>
-        <mapperTableEntries name="SOR_ID" type="id_Integer"/>
-        <mapperTableEntries name="SOR_LOADDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="DI_JOBID" type="id_String"/>
-        <mapperTableEntries name="DI_CREATEDATE" type="id_Date"/>
-        <mapperTableEntries name="DI_MODIFIEDDATE" type="id_Date"/>
       </inputTables>
       <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="FactExchangeRate_Oracle" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="EXCHANGERATESK" type="id_Integer"/>
-        <mapperTableEntries name="CURRENCYDATESK" type="id_Integer"/>
         <mapperTableEntries expression="ResellerSales_Oracle.SALESDATE " name="CURRENCYDATEKEY" operator="=" type="id_Date"/>
-        <mapperTableEntries expression="" name="CURRENCYSK" type="id_Integer"/>
+        <mapperTableEntries name="CURRENCYSK" type="id_Integer"/>
         <mapperTableEntries name="ENDOFDAYRATE" type="id_Double"/>
-        <mapperTableEntries name="SOR_ID" type="id_Integer"/>
-        <mapperTableEntries name="SOR_LOADDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="DI_JOBID" type="id_String"/>
-        <mapperTableEntries name="DI_CREATEDATE" type="id_Date"/>
-        <mapperTableEntries name="DI_MODIFIEDDATE" type="id_Date"/>
       </inputTables>
-      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimCurrency_Oracle" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="FactExchangeRate_Oracle.CURRENCYSK " name="CURRENCYSK" operator="=" type="id_Integer"/>
-        <mapperTableEntries expression="" name="CURRENCYKEY" type="id_Integer"/>
-        <mapperTableEntries name="CURRENCYLABEL" type="id_String"/>
-        <mapperTableEntries name="CURRENCYNAME" type="id_String"/>
-        <mapperTableEntries name="CURRENCYDESCRIPTION" type="id_String"/>
-        <mapperTableEntries name="SOR_ID" type="id_Integer"/>
-        <mapperTableEntries name="SOR_LOADDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
-        <mapperTableEntries name="DI_JOBID" type="id_String"/>
-        <mapperTableEntries name="DI_CREATEDATE" type="id_Date"/>
-        <mapperTableEntries name="DI_MODIFIEDDATE" type="id_Date"/>
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DimGeography" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="DimStore_Oracle.GEOGRAPHYSK " name="GEOGRAPHYSK" operator="=" type="id_Integer"/>
+        <mapperTableEntries name="GEOGRAPHYKEY" type="id_Integer"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1312" posY="0">
+  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1696" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_2"/>
+    <elementParameter field="CHECK" name="PARALLELIZE" value="true"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="16"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -637,7 +513,7 @@
     <elementParameter field="TEXT" name="USER" value="&quot;RETAIL_DW&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="QZzeDh88UbDfNBxh3xQ2mA=="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;FACTSALES&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" show="false" value="TRUNCATE"/>
     <elementParameter field="LABEL" name="NOTE" show="false" value="Warning : this component configuration will automatically generate a commit before data insert/update/delete"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
@@ -938,7 +814,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="256">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -959,7 +835,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMSTORE.STORESK, &#10;  RETAIL_DW.DIMSTORE.STOREID, &#10;  RETAIL_DW.DIMSTORE.STOREKEY, &#10;  RETAIL_DW.DIMSTORE.SALESTERRITORYSK, &#10;  RETAIL_DW.DIMSTORE.STOREMANAGER, &#10;  RETAIL_DW.DIMSTORE.STORETYPE, &#10;  RETAIL_DW.DIMSTORE.STORENAME, &#10;  RETAIL_DW.DIMSTORE.STOREDESCRIPTION, &#10;  RETAIL_DW.DIMSTORE.STATUS, &#10;  RETAIL_DW.DIMSTORE.OPENDATE, &#10;  RETAIL_DW.DIMSTORE.CLOSEDATE, &#10;  RETAIL_DW.DIMSTORE.ENTITYKEY, &#10;  RETAIL_DW.DIMSTORE.ZIPCODE, &#10;  RETAIL_DW.DIMSTORE.ZIPCODEEXTENSION, &#10;  RETAIL_DW.DIMSTORE.STOREPHONE, &#10;  RETAIL_DW.DIMSTORE.STOREFAX, &#10;  RETAIL_DW.DIMSTORE.ADDRESSLINE1, &#10;  RETAIL_DW.DIMSTORE.ADDRESSLINE2, &#10;  RETAIL_DW.DIMSTORE.GEOGRAPHYSK, &#10;  RETAIL_DW.DIMSTORE.CLOSEREASON, &#10;  RETAIL_DW.DIMSTORE.EMPLOYEECOUNT, &#10;  RETAIL_DW.DIMSTORE.SELLINGAREASIZE, &#10;  RETAIL_DW.DIMSTORE.LASTREMODELDATE, &#10;  RETAIL_DW.DIMSTORE.SOR_ID, &#10;  RETAIL_DW.DIMSTORE.SOR_LOADDATE, &#10;  RETAIL_DW.DIMSTORE.SOR_UPDATEDATE, &#10;  RETAIL_DW.DIMSTORE.DI_JOBID, &#10;  RETAIL_DW.DIMSTORE.DI_CREATEDATE, &#10;  RETAIL_DW.DIMSTORE.DI_MODIFIEDDATE&#10;FROM RETAIL_DW.DIMSTORE&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMSTORE.STORESK, &#10;  RETAIL_DW.DIMSTORE.STOREID, &#10;  RETAIL_DW.DIMSTORE.GEOGRAPHYSK&#10;FROM RETAIL_DW.DIMSTORE&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -978,59 +854,7 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="STOREID"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOREKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SALESTERRITORYSK"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOREMANAGER"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STORETYPE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STORENAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOREDESCRIPTION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STATUS"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="OPENDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CLOSEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ENTITYKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ZIPCODE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ZIPCODEEXTENSION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOREPHONE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOREFAX"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ADDRESSLINE1"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ADDRESSLINE2"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="GEOGRAPHYSK"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CLOSEREASON"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="EMPLOYEECOUNT"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SELLINGAREASIZE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LASTREMODELDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_ID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_LOADDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_UPDATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_JOBID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_CREATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_MODIFIEDDATE"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
@@ -1043,90 +867,12 @@
       <column comment="" key="false" length="-1" name="STOREID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="-1" name="STOREKEY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="SALESTERRITORYSK" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="STOREMANAGER" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="15" name="STORETYPE" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="100" name="STORENAME" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="300" name="STOREDESCRIPTION" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="STATUS" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="OPENDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="CLOSEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="ENTITYKEY" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="ZIPCODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="ZIPCODEEXTENSION" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="15" name="STOREPHONE" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="14" name="STOREFAX" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="100" name="ADDRESSLINE1" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="100" name="ADDRESSLINE2" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
       <column comment="" key="false" length="-1" name="GEOGRAPHYSK" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="CLOSEREASON" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="EMPLOYEECOUNT" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="8" name="SELLINGAREASIZE" nullable="true" pattern="" precision="0" sourceType="BINARY_DOUBLE" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="LASTREMODELDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="-1" key="false" length="-1" name="SOR_ID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_LOADDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_UPDATEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="DI_JOBID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_CREATEDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_MODIFIEDDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="352">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_9"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1147,7 +893,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSK, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTKEY, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCT_ID, &#10;  RETAIL_DW.DIMPRODUCT.BRAND_ID, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTLABEL, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTNAME, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTDESCRIPTION, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSUBCATEGORYKEY, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSUBCATEGORYLABEL, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSUBCATEGORYNAME, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSUBCATEGORYDESCRIPTION, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTCATEGORYKEY, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTCATEGORYLABEL, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTCATEGORYNAME, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTCATEGORYDESCRIPTION, &#10;  RETAIL_DW.DIMPRODUCT.MANUFACTURER, &#10;  RETAIL_DW.DIMPRODUCT.BRANDNAME, &#10;  RETAIL_DW.DIMPRODUCT.CLASSID, &#10;  RETAIL_DW.DIMPRODUCT.CLASSNAME, &#10;  RETAIL_DW.DIMPRODUCT.STYLEID, &#10;  RETAIL_DW.DIMPRODUCT.STYLENAME, &#10;  RETAIL_DW.DIMPRODUCT.COLORID, &#10;  RETAIL_DW.DIMPRODUCT.COLORNAME, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSIZE, &#10;  RETAIL_DW.DIMPRODUCT.SIZERANGE, &#10;  RETAIL_DW.DIMPRODUCT.SIZEUNITMEASUREID, &#10;  RETAIL_DW.DIMPRODUCT.WEIGHT, &#10;  RETAIL_DW.DIMPRODUCT.WEIGHTUNITMEASUREID, &#10;  RETAIL_DW.DIMPRODUCT.UNITOFMEASUREID, &#10;  RETAIL_DW.DIMPRODUCT.UNITOFMEASURENAME, &#10;  RETAIL_DW.DIMPRODUCT.STOCKTYPEID, &#10;  RETAIL_DW.DIMPRODUCT.STOCKTYPENAME, &#10;  RETAIL_DW.DIMPRODUCT.AVAILABLEFORSALEDATE, &#10;  RETAIL_DW.DIMPRODUCT.STOPSALEDATE, &#10;  RETAIL_DW.DIMPRODUCT.STATUS, &#10;  RETAIL_DW.DIMPRODUCT.SOR_ID, &#10;  RETAIL_DW.DIMPRODUCT.SOR_LOADDATE, &#10;  RETAIL_DW.DIMPRODUCT.SOR_UPDATEDATE, &#10;  RETAIL_DW.DIMPRODUCT.DI_JOBID, &#10;  RETAIL_DW.DIMPRODUCT.DI_CREATEDATE, &#10;  RETAIL_DW.DIMPRODUCT.DI_MODIFIEDDATE&#10;FROM RETAIL_DW.DIMPRODUCT&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTSK, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCT_ID, &#10;  RETAIL_DW.DIMPRODUCT.BRAND_ID, &#10;  RETAIL_DW.DIMPRODUCT.PRODUCTLABEL&#10;FROM RETAIL_DW.DIMPRODUCT&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -1164,85 +910,11 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN" show="false">
       <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTSK"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCT_ID"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="BRAND_ID"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTLABEL"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTDESCRIPTION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTSUBCATEGORYKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTSUBCATEGORYLABEL"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTSUBCATEGORYNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTSUBCATEGORYDESCRIPTION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTCATEGORYKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTCATEGORYLABEL"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTCATEGORYNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTCATEGORYDESCRIPTION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="MANUFACTURER"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="BRANDNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CLASSID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CLASSNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STYLEID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STYLENAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="COLORID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="COLORNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRODUCTSIZE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SIZERANGE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SIZEUNITMEASUREID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="WEIGHT"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="WEIGHTUNITMEASUREID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="UNITOFMEASUREID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="UNITOFMEASURENAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOCKTYPEID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOCKTYPENAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="AVAILABLEFORSALEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STOPSALEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STATUS"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_ID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_LOADDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_UPDATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_JOBID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_CREATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_MODIFIEDDATE"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
@@ -1250,9 +922,6 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="DIMPRODUCT" name="tDBInput_9">
       <column comment="" key="true" length="-1" name="PRODUCTSK" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="PRODUCTKEY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="24" name="PRODUCT_ID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
@@ -1264,117 +933,9 @@
       <column comment="" key="false" length="24" name="PRODUCTLABEL" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="500" name="PRODUCTNAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="400" name="PRODUCTDESCRIPTION" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="PRODUCTSUBCATEGORYKEY" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="100" name="PRODUCTSUBCATEGORYLABEL" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="PRODUCTSUBCATEGORYNAME" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="100" name="PRODUCTSUBCATEGORYDESCRIPTION" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="PRODUCTCATEGORYKEY" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="100" name="PRODUCTCATEGORYLABEL" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="30" name="PRODUCTCATEGORYNAME" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="PRODUCTCATEGORYDESCRIPTION" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="MANUFACTURER" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="BRANDNAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="CLASSID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="CLASSNAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="STYLEID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="STYLENAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="COLORID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="COLORNAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="PRODUCTSIZE" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="SIZERANGE" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="SIZEUNITMEASUREID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="8" name="WEIGHT" nullable="true" pattern="" precision="0" sourceType="BINARY_DOUBLE" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="WEIGHTUNITMEASUREID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="UNITOFMEASUREID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="40" name="UNITOFMEASURENAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="STOCKTYPEID" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="40" name="STOCKTYPENAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="AVAILABLEFORSALEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="STOPSALEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="STATUS" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="-1" key="false" length="-1" name="SOR_ID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_LOADDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_UPDATEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="DI_JOBID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_CREATEDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_MODIFIEDDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="480">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_7"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1395,7 +956,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONSK, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONID, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONKEY, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONLABEL, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONNAME, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONDESCRIPTION, &#10;  RETAIL_DW.DIMPROMOTION.DISCOUNTPERCENT, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONTYPE, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONCATEGORY, &#10;  RETAIL_DW.DIMPROMOTION.STARTDATE, &#10;  RETAIL_DW.DIMPROMOTION.ENDDATE, &#10;  RETAIL_DW.DIMPROMOTION.MINQUANTITY, &#10;  RETAIL_DW.DIMPROMOTION.MAXQUANTITY, &#10;  RETAIL_DW.DIMPROMOTION.SOR_ID, &#10;  RETAIL_DW.DIMPROMOTION.SOR_LOADDATE, &#10;  RETAIL_DW.DIMPROMOTION.SOR_UPDATEDATE, &#10;  RETAIL_DW.DIMPROMOTION.DI_JOBID, &#10;  RETAIL_DW.DIMPROMOTION.DI_CREATEDATE, &#10;  RETAIL_DW.DIMPROMOTION.DI_MODIFIEDDATE&#10;FROM RETAIL_DW.DIMPROMOTION&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONSK, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONID, &#10;  RETAIL_DW.DIMPROMOTION.PROMOTIONLABEL&#10;FROM RETAIL_DW.DIMPROMOTION&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -1414,39 +975,7 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONID"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONLABEL"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONDESCRIPTION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DISCOUNTPERCENT"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONTYPE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PROMOTIONCATEGORY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="STARTDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ENDDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="MINQUANTITY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="MAXQUANTITY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_ID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_LOADDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_UPDATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_JOBID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_CREATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_MODIFIEDDATE"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
@@ -1459,158 +988,12 @@
       <column comment="" key="false" length="-1" name="PROMOTIONID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="-1" name="PROMOTIONKEY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
       <column comment="" key="false" length="12" name="PROMOTIONLABEL" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="100" name="PROMOTIONNAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="255" name="PROMOTIONDESCRIPTION" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="8" name="DISCOUNTPERCENT" nullable="true" pattern="" precision="0" sourceType="BINARY_DOUBLE" type="id_Double" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="PROMOTIONTYPE" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="PROMOTIONCATEGORY" nullable="true" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="STARTDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="ENDDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="MINQUANTITY" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="MAXQUANTITY" nullable="true" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="-1" key="false" length="-1" name="SOR_ID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_LOADDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_UPDATEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="DI_JOBID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_CREATEDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_MODIFIEDDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="544">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_14"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_12"/>
-    <elementParameter field="TEXT" name="RAC_URL" show="false" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" show="false" value="ORACLE_SID"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1521&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;xe&quot;"/>
-    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME" show="false" value="&quot;xe&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;RETAIL_DW&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;RETAIL_DW&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="QZzeDh88UbDfNBxh3xQ2mA=="/>
-    <elementParameter field="TEXT" name="JDBC_URL" show="false" value="&quot;jdbc:oracle:oci:/@talend&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;DIMCURRENCY&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMCURRENCY.CURRENCYSK, &#10;  RETAIL_DW.DIMCURRENCY.CURRENCYKEY, &#10;  RETAIL_DW.DIMCURRENCY.CURRENCYLABEL, &#10;  RETAIL_DW.DIMCURRENCY.CURRENCYNAME, &#10;  RETAIL_DW.DIMCURRENCY.CURRENCYDESCRIPTION, &#10;  RETAIL_DW.DIMCURRENCY.SOR_ID, &#10;  RETAIL_DW.DIMCURRENCY.SOR_LOADDATE, &#10;  RETAIL_DW.DIMCURRENCY.SOR_UPDATEDATE, &#10;  RETAIL_DW.DIMCURRENCY.DI_JOBID, &#10;  RETAIL_DW.DIMCURRENCY.DI_CREATEDATE, &#10;  RETAIL_DW.DIMCURRENCY.DI_MODIFIEDDATE&#10;FROM RETAIL_DW.DIMCURRENCY&quot;"/>
-    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
-    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
-    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="oracle_id"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
-    <elementParameter field="LABEL" name="NOTE" value="*Note: Example for Additional JDBC Parameters: &quot;parameterName1=value1&amp;&amp;parameterName2=value2&quot;"/>
-    <elementParameter field="CHECK" name="IS_CONVERT_XMLTYPE" value="false"/>
-    <elementParameter field="TABLE" name="CONVERT_XMLTYPE" show="false"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
-    <elementParameter field="TEXT" name="CURSOR_SIZE" show="false" value="1000"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="true"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYSK"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYKEY"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYLABEL"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYNAME"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYDESCRIPTION"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_ID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_LOADDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_UPDATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_JOBID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_CREATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_MODIFIEDDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="DIMCURRENCY" name="tDBInput_14">
-      <column comment="" key="true" length="-1" name="CURRENCYSK" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="CURRENCYKEY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="10" name="CURRENCYLABEL" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="CURRENCYNAME" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="50" name="CURRENCYDESCRIPTION" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="-1" key="false" length="-1" name="SOR_ID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_LOADDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_UPDATEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="DI_JOBID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_CREATEDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_MODIFIEDDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-    </metadata>
-  </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="576">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_16"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
@@ -1631,7 +1014,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.FACTEXCHANGERATE.EXCHANGERATESK, &#10;  RETAIL_DW.FACTEXCHANGERATE.CURRENCYDATESK, &#10;  RETAIL_DW.FACTEXCHANGERATE.CURRENCYDATEKEY, &#10;  RETAIL_DW.FACTEXCHANGERATE.CURRENCYSK, &#10;  RETAIL_DW.FACTEXCHANGERATE.ENDOFDAYRATE, &#10;  RETAIL_DW.FACTEXCHANGERATE.SOR_ID, &#10;  RETAIL_DW.FACTEXCHANGERATE.SOR_LOADDATE, &#10;  RETAIL_DW.FACTEXCHANGERATE.SOR_UPDATEDATE, &#10;  RETAIL_DW.FACTEXCHANGERATE.DI_JOBID, &#10;  RETAIL_DW.FACTEXCHANGERATE.DI_CREATEDATE, &#10;  RETAIL_DW.FACTEXCHANGERATE.DI_MODIFIEDDATE&#10;FROM RETAIL_DW.FACTEXCHANGERATE&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.FACTEXCHANGERATE.CURRENCYDATEKEY, &#10;  RETAIL_DW.FACTEXCHANGERATE.CURRENCYSK, &#10;  RETAIL_DW.FACTEXCHANGERATE.ENDOFDAYRATE&#10;FROM RETAIL_DW.FACTEXCHANGERATE&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -1646,39 +1029,17 @@
     <elementParameter field="TEXT" name="CURSOR_SIZE" show="false" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="true"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="EXCHANGERATESK"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYDATESK"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYDATEKEY"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="CURRENCYSK"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="ENDOFDAYRATE"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_ID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_LOADDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SOR_UPDATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_JOBID"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_CREATEDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DI_MODIFIEDDATE"/>
-      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
     <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="FACTEXCHANGERATE" name="tDBInput_16">
-      <column comment="" key="true" length="-1" name="EXCHANGERATESK" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="-1" name="CURRENCYDATESK" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
       <column comment="" key="false" length="7" name="CURRENCYDATEKEY" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
@@ -1688,28 +1049,12 @@
       <column comment="" key="false" length="19" name="ENDOFDAYRATE" nullable="false" pattern="" precision="4" sourceType="NUMBER" type="id_Double" usefulColumn="true">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" defaultValue="-1" key="false" length="-1" name="SOR_ID" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_LOADDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="7" name="SOR_UPDATEDATE" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="20" name="DI_JOBID" nullable="false" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_CREATEDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" defaultValue="'systimestamp'" key="false" length="7" name="DI_MODIFIEDDATE" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true">
-        <additionalField key="Comment" value=""/>
-      </column>
     </metadata>
   </node>
-  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1312" posY="288">
+  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1696" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_9"/>
+    <elementParameter field="CHECK" name="PARALLELIZE" value="true"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="16"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -1724,7 +1069,7 @@
     <elementParameter field="TEXT" name="USER" value="&quot;RETAIL_DW&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="QZzeDh88UbDfNBxh3xQ2mA=="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;FACTSALES_REJECTS&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" show="false" value="TRUNCATE"/>
     <elementParameter field="LABEL" name="NOTE" show="false" value="Warning : this component configuration will automatically generate a commit before data insert/update/delete"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
@@ -2135,7 +1480,62 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="CNTL_Job_Tracking_Stats_CHILD" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="1696" posY="128">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1472" posY="640">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
+    <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_12"/>
+    <elementParameter field="TEXT" name="RAC_URL" show="false" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" show="false" value="ORACLE_SID"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1521&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;xe&quot;"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME" show="false" value="&quot;xe&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;RETAIL_DW&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;RETAIL_DW&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="QZzeDh88UbDfNBxh3xQ2mA=="/>
+    <elementParameter field="TEXT" name="JDBC_URL" show="false" value="&quot;jdbc:oracle:oci:/@talend&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;DIMGEOGRAPHY&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  RETAIL_DW.DIMGEOGRAPHY.GEOGRAPHYSK, &#10;  RETAIL_DW.DIMGEOGRAPHY.GEOGRAPHYKEY&#10;FROM RETAIL_DW.DIMGEOGRAPHY&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" show="false" value="oracle_id"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+    <elementParameter field="LABEL" name="NOTE" value="*Note: Example for Additional JDBC Parameters: &quot;parameterName1=value1&amp;&amp;parameterName2=value2&quot;"/>
+    <elementParameter field="CHECK" name="IS_CONVERT_XMLTYPE" value="false"/>
+    <elementParameter field="TABLE" name="CONVERT_XMLTYPE" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" show="false" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="GEOGRAPHYSK"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="GEOGRAPHYKEY"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="NO_NULL_VALUES" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="DIMGEOGRAPHY" name="tDBInput_2">
+      <column comment="" key="true" length="-1" name="GEOGRAPHYSK" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="-1" name="GEOGRAPHYKEY" nullable="false" pattern="" precision="0" sourceType="NUMBER" type="id_Integer" usefulColumn="true">
+        <additionalField key="Comment" value=""/>
+      </column>
+    </metadata>
+  </node>
+  <node componentName="CNTL_Job_Tracking_Stats_CHILD" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="736" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="CNTL_Job_Tracking_Stats_CHILD_1"/>
     <elementParameter field="TEXT" name="FAMILY" value="Joblets"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -2153,33 +1553,33 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="ResellerSales_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="FactResellerSales_Oracle_Output" lineStyle="0" metaname="FactResellerSales_Oracle_Output" offsetLabelX="-9" offsetLabelY="2" outputId="1" source="tMap_1" target="tDBOutput_2">
+  <connection connectorName="FLOW" label="FactResellerSales_Oracle_Output" lineStyle="0" metaname="FactResellerSales_Oracle_Output" offsetLabelX="-13" offsetLabelY="20" outputId="1" source="tMap_1" target="tDBOutput_2">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactResellerSales_Oracle_Output"/>
   </connection>
-  <connection connectorName="FLOW" label="FactResellerSales_Rejects_Oracle_Output" lineStyle="0" metaname="FactResellerSales_Rejects_Oracle_Output" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tDBOutput_9">
+  <connection connectorName="FLOW" label="FactResellerSales_Rejects_Oracle_Output" lineStyle="0" metaname="FactResellerSales_Rejects_Oracle_Output" offsetLabelX="27" offsetLabelY="50" outputId="2" source="tMap_1" target="tDBOutput_9">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactResellerSales_Rejects_Oracle_Output"/>
   </connection>
-  <connection connectorName="FLOW" label="DimStore_Oracle" lineStyle="8" metaname="tDBInput_5" offsetLabelX="0" offsetLabelY="0" source="tDBInput_5" target="tMap_1">
+  <connection connectorName="FLOW" label="DimStore_Oracle" lineStyle="8" metaname="tDBInput_5" offsetLabelX="-9" offsetLabelY="18" source="tDBInput_5" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimStore_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimProduct_Oracle" lineStyle="8" metaname="tDBInput_9" offsetLabelX="0" offsetLabelY="0" source="tDBInput_9" target="tMap_1">
+  <connection connectorName="FLOW" label="DimProduct_Oracle" lineStyle="8" metaname="tDBInput_9" offsetLabelX="-4" offsetLabelY="16" source="tDBInput_9" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimProduct_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimPromotion_Oracle" lineStyle="8" metaname="tDBInput_7" offsetLabelX="0" offsetLabelY="0" source="tDBInput_7" target="tMap_1">
+  <connection connectorName="FLOW" label="DimPromotion_Oracle" lineStyle="8" metaname="tDBInput_7" offsetLabelX="-3" offsetLabelY="12" source="tDBInput_7" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimPromotion_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimCurrency_Oracle" lineStyle="8" metaname="tDBInput_14" offsetLabelX="0" offsetLabelY="0" source="tDBInput_14" target="tMap_1">
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimCurrency_Oracle"/>
-  </connection>
-  <connection connectorName="FLOW" label="FactExchangeRate_Oracle" lineStyle="8" metaname="tDBInput_16" offsetLabelX="0" offsetLabelY="0" source="tDBInput_16" target="tMap_1">
+  <connection connectorName="FLOW" label="FactExchangeRate_Oracle" lineStyle="8" metaname="tDBInput_16" offsetLabelX="3" offsetLabelY="9" source="tDBInput_16" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactExchangeRate_Oracle"/>
+  </connection>
+  <connection connectorName="FLOW" label="DimGeography" lineStyle="8" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="27" source="tDBInput_2" target="tMap_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimGeography"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_11"/>
@@ -2191,13 +1591,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="91;132;151"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="206;225;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_b29e35b1-1f52-40f2-825e-8f28b113c000"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>kjI/FT7xYbMb43NY1YDRw95/fU0PuS60OksfgwcJar4jndsgiA/VTKeFYmjge1777hKmH1gAIbkX
-z71UYpxQ9A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_c785770a-4e15-40bf-bd79-b9f6deab873d"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>XbNExiYioXuC10GDR1Z8zRdbF1A5f23gKFzkiC6Jbgazn466RxGAUnmyPoAmb3d+ZoAcIfspIFTj
-rCvhYOv+xQ==</DigestValue></Reference></SignedInfo><SignatureValue>aDUXVr6AfEfpkcKA8JkvjPJieUbHJhJX33+ivTc9RgEspTNl1sm6NqKPTuZYDOvK/d/GnlQhDxDr
-8iZEGC3+rm/PTivxZ1P57FeAcyEgWIK/L9cn7Ziq4LiDMWrThCkzXMPngabSbgIqLdZYinjre9bN
-IiFF2jgy8N1Rjk2kvpK6sycwwEropd/eDhdUX572QUu/wLmc+rNYH17lA61hwWyum2zkNJvGXhvz
-CuGvZiTDrqENG/MSQI0PIxs2SdNV7aoeAKdHJuB1tFvnqETGlQ87jYsd4EnOJ8pg0B8zuvvadcNT
-QItjkD+MuVrc54JYbfshgqzBOepuFIvsvERWtQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=Default code-signing certificate,OU=R&amp;D,O=Talend Inc.,ST=Paris,C=FR</X509SubjectName><X509Certificate>MIIFYzCCA0ugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBjTELMAkGA1UEBhMCRlIxDjAMBgNVBAgM
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_6c7d54b3-8eef-4fc6-a623-7dea9ec70417"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>S8+JCwEaWg41m+ovDrO/ni6xdzeWirb1iEnNfiNl+M8sbmhOM3G9BTR5OZF3Elz1Kf8GHkpMAN+C
+cd28OltPzg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_818bc896-dce3-44af-bf08-15e0d29c417e"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>DMVOzUvj4nZyo5mZMfo91bTM7g3c5PA49kSAuXOM8khKaky91am0JuF5zw8SF9qG1PO0oO2VkCqi
+5QY6k3RF0g==</DigestValue></Reference></SignedInfo><SignatureValue>WL4Yhi9cZBjH0xsSC+Tp1T9XIz8oIJvKFtdwYZoONHwHWGO6Yg1UIoKqFEGJleZTfNa05qLrcyZe
+OmeijG9E8s/+9vhn1CqntQ/i1GxQe5v+aqlSvP2Qbc4clLQp1pyaLO4GrRZOxRjC9ZMs4fgTY10l
+c+Pl8eaDN/ZFiwTepKcss7+ljAQvAj6PLc7ODcBIy3hPVdVRShJ/V42fPwgaIxdJEIDJl2C4D2hc
+s9Krt7/v49iveZ4bdEztkARxHbGmMDqTz6vBMZaFp3YA4tBrC8d3w5HFXhx0MDF5y5ckcQ8lP6ug
+ey0joKkE34ETEa0DwPhBfXLDDEkUR0aqYEbjjA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=Default code-signing certificate,OU=R&amp;D,O=Talend Inc.,ST=Paris,C=FR</X509SubjectName><X509Certificate>MIIFYzCCA0ugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBjTELMAkGA1UEBhMCRlIxDjAMBgNVBAgM
 BVBhcmlzMQ4wDAYDVQQHDAVQYXJpczEUMBIGA1UECgwLVGFsZW5kIEluYy4xDDAKBgNVBAsMA1Im
 RDEWMBQGA1UEAwwNVGFsZW5kIFImRCBDQTEiMCAGCSqGSIb3DQEJARYTc2VjdXJpdHlAdGFsZW5k
 LmNvbTAeFw0xODAxMTgwMDA2MTJaFw0yMTAxMTcwMDA2MTJaMGwxCzAJBgNVBAYTAkZSMQ4wDAYD
@@ -2221,4 +1621,4 @@ r3/fbKJ02Ni9kCnkY8wQS1yn45UNl1woSjryza4f4uLKGkrrIsUPXK+Vy4A1Il8XgFfmrtgA8m9s
 EHyu0OyAJH/agWN+GLhF/ssp26oXhiYqTkG4sQtNRFQG0isaYf/JWSt3f8Q+7/pnZpz4mfEAFimI
 BBLzRwDA6x9qqOn0RXxBo9pH16EO3SXPLR64cJum8B/RI/i8H6OkQDO1tEiE6UeceZk++U7fnD3c
 6i9Km85GTgQi6REsVZGIL/tZNIzN//qPwi7cDo3Cf/xmPrIKQhHJaxCqmbjGDmC8AXOaqNfWotVX
-Wy2dcglW62PDszE/HKh9</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_c785770a-4e15-40bf-bd79-b9f6deab873d" Target="#_b29e35b1-1f52-40f2-825e-8f28b113c000"><Timestamp>2018-08-15 14:50:16</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+Wy2dcglW62PDszE/HKh9</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_818bc896-dce3-44af-bf08-15e0d29c417e" Target="#_6c7d54b3-8eef-4fc6-a623-7dea9ec70417"><Timestamp>2018-08-17 05:22:16</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>

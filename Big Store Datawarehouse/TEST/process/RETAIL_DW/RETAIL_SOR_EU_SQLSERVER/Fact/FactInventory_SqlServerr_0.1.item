@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Default" jobType="Standard" xmi:version="2.0">
   <context confirmationNeeded="false" name="Default"/>
   <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" show="false" value="{&quot;JOB_RUN_VM_ARGUMENTS&quot;:[&quot;-Xms12G&quot;,&quot;-Xmx16G&quot;]}"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" show="false" value="true"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="0"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" show="false" value=""/>
@@ -56,7 +58,7 @@
     <elementParameter field="CHECK" name="ON_METERCATCHER_FLAG" value="false"/>
     <elementParameter field="CHECK" name="ON_CONSOLE_FLAG" show="false" value="false"/>
     <elementParameter field="CHECK" name="ON_FILES_FLAG" show="false" value="false"/>
-    <elementParameter field="DIRECTORY" name="FILE_PATH" show="false" value="&quot;C:/Users/Anuja/workspace/.metadata&quot;"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" show="false" value="&quot;C:/Users/Haroon/workspace/.metadata&quot;"/>
     <elementParameter field="TEXT" name="FILENAME_STATS" show="false" value="&quot;stats_file.txt&quot;"/>
     <elementParameter field="TEXT" name="FILENAME_LOGS" show="false" value="&quot;logs_file.txt&quot;"/>
     <elementParameter field="TEXT" name="FILENAME_METTER" show="false" value="&quot;meter_file.txt&quot;"/>
@@ -112,7 +114,7 @@
     <routinesParameter id="_kZFCwGnqEeiNs9TsG9ixDw" name="TalendStringUtil"/>
     <routinesParameter id="_kYoW1mnqEeiNs9TsG9ixDw" name="TalendString"/>
   </parameters>
-  <node componentName="CNTL_Job_Tracking_Stats_CHILD" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="704" posY="384">
+  <node componentName="CNTL_Job_Tracking_Stats_CHILD" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="CNTL_Job_Tracking_Stats_CHILD_1"/>
     <elementParameter field="TEXT" name="FAMILY" value="Joblets"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -126,12 +128,10 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
   </node>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="96">
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_yKxgoJ6mEeiuishMaFKb5A"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DRIVER" value="JTDS"/>
     <elementParameter field="TEXT" name="TYPE" show="false" value="MSSQL"/>
@@ -153,8 +153,8 @@
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="true"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN" show="false">
       <elementValue elementRef="SCHEMA_COLUMN" value="InventoryID"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="InventoryDate"/>
@@ -226,12 +226,12 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="96">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_dxf-sJ-IEeihsesp9e_JaQ-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_3-K0kKAEEeiZVZG_SeuS1A-tMap_1-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" show="false" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" show="false" value="false"/>
     <elementParameter field="TEXT" name="LEVENSHTEIN" show="false" value="0"/>
@@ -376,7 +376,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables minimized="true" name="FactInventory_SqlServer_Output" sizeState="INTERMEDIATE">
+      <outputTables name="FactInventory_SqlServer_Output" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="((Relational.ISNULL(Inventory_SqlServer.InventoryDate)) ?99: &#13;&#10;Integer.parseInt(routines.TalendDate.formatDate(&quot;yyyyMMdd&quot;,Inventory_SqlServer.InventoryDate))&#13;&#10; ) " name="INVENTORYDATESK" type="id_Integer"/>
         <mapperTableEntries expression="Inventory_SqlServer.InventoryDate" name="INVENTORYDATE" type="id_Date"/>
         <mapperTableEntries expression="DimStore_Oracle.STORESK" name="STORESK" type="id_Integer"/>
@@ -389,14 +389,14 @@
         <mapperTableEntries expression="Inventory_SqlServer.MinDayInStock" name="MINDAYINSTOCK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="Inventory_SqlServer.MaxDayInStock" name="MAXDAYINSTOCK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="Inventory_SqlServer.Aging" name="AGING" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="4" name="SOR_ID" type="id_Integer"/>
+        <mapperTableEntries expression="413" name="SOR_ID" type="id_Integer"/>
         <mapperTableEntries expression="Inventory_SqlServer.LoadDate " name="SOR_LOADDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="Inventory_SqlServer.UpdateDate " name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="context.getProperty(&quot;vChildPID&quot;)" name="DI_JOBID" type="id_String"/>
         <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_CREATEDATE" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_MODIFIEDDATE" type="id_Date"/>
       </outputTables>
-      <outputTables name="FactInventory_Rejects_SqlServer_Output" rejectInnerJoin="true" sizeState="INTERMEDIATE">
+      <outputTables activateColumnNameFilter="true" activateCondensedTool="true" columnNameFilter="" name="FactInventory_Rejects_SqlServer_Output" rejectInnerJoin="true" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="((Relational.ISNULL(Inventory_SqlServer.InventoryDate)) ?99: &#13;&#10;Integer.parseInt(routines.TalendDate.formatDate(&quot;yyyyMMdd&quot;,Inventory_SqlServer.InventoryDate))&#13;&#10; ) " name="INVENTORYDATESK" type="id_Integer"/>
         <mapperTableEntries expression="Inventory_SqlServer.InventoryDate" name="INVENTORYDATE" type="id_Date"/>
         <mapperTableEntries expression="DimStore_Oracle.STORESK" name="STORESK" type="id_Integer"/>
@@ -416,14 +416,14 @@
         <mapperTableEntries expression="DimProduct_Oracle.BRAND_ID" name="BRAND_ID" nullable="true" type="id_String"/>
         <mapperTableEntries expression="DimProduct_Oracle.PRODUCT_ID" name="PRODUCT_ID" nullable="true" type="id_String"/>
         <mapperTableEntries expression="DimGeography_Oracle.GEOGRAPHYKEY " name="GEOGRAPHYID" nullable="true" type="id_Integer"/>
-        <mapperTableEntries expression="4" name="SOR_ID" type="id_Integer"/>
+        <mapperTableEntries expression="413" name="SOR_ID" type="id_Integer"/>
         <mapperTableEntries expression="Inventory_SqlServer.LoadDate " name="SOR_LOADDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="Inventory_SqlServer.LoadDate " name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="context.getProperty(&quot;vChildPID&quot;)" name="DI_JOBID" type="id_String"/>
         <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_CREATEDATE" type="id_Date"/>
         <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_MODIFIEDDATE" type="id_Date"/>
       </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Inventory_SqlServer" sizeState="INTERMEDIATE">
+      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="Inventory_SqlServer" sizeState="INTERMEDIATE">
         <mapperTableEntries name="InventoryID" type="id_Integer"/>
         <mapperTableEntries name="InventoryDate" type="id_Date"/>
         <mapperTableEntries name="StoreID" type="id_Integer"/>
@@ -438,27 +438,25 @@
         <mapperTableEntries name="LoadDate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="UpdateDate" nullable="true" type="id_Date"/>
       </inputTables>
-      <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimStore_Oracle" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="STORESK" type="id_Integer"/>
-        <mapperTableEntries expression="Inventory_SqlServer.StoreID " name="STOREID" operator="=" type="id_Integer"/>
-        <mapperTableEntries expression="" name="GEOGRAPHYSK" type="id_Integer"/>
-      </inputTables>
       <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimProduct_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries name="PRODUCTSK" type="id_Integer"/>
         <mapperTableEntries expression="" name="PRODUCT_ID" type="id_String"/>
         <mapperTableEntries expression="Inventory_SqlServer.Brand_ID " name="BRAND_ID" operator="=" type="id_String"/>
         <mapperTableEntries name="PRODUCTLABEL" type="id_String"/>
       </inputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DimGeography_Oracle" sizeState="INTERMEDIATE">
+      <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimStore_Oracle" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="STORESK" type="id_Integer"/>
+        <mapperTableEntries expression="Inventory_SqlServer.StoreID " name="STOREID" operator="=" type="id_Integer"/>
+        <mapperTableEntries expression="" name="GEOGRAPHYSK" type="id_Integer"/>
+      </inputTables>
+      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimGeography_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="DimStore_Oracle.GEOGRAPHYSK " name="GEOGRAPHYSK" operator="=" type="id_Integer"/>
         <mapperTableEntries name="GEOGRAPHYKEY" type="id_Integer"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="224">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="640">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_2"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_YPDwEJ6nEeiuishMaFKb5A"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -515,10 +513,8 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="352">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_3"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_YPDwEJ6nEeiuishMaFKb5A"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -572,10 +568,10 @@
       <column comment="" key="false" length="24" name="PRODUCTLABEL" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="96">
+  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1568" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_YPDwEJ6nEeiuishMaFKb5A"/>
+    <elementParameter field="CHECK" name="PARALLELIZE" value="true"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="16"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -590,7 +586,7 @@
     <elementParameter field="TEXT" name="USER" value="&quot;RETAIL_DW&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="QZzeDh88UbDfNBxh3xQ2mA=="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;FACTINVENTORY&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" show="false" value="NONE"/>
     <elementParameter field="LABEL" name="NOTE" show="false" value="Warning : this component configuration will automatically generate a commit before data insert/update/delete"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
@@ -825,10 +821,10 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="192">
+  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1568" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_2"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_YPDwEJ6nEeiuishMaFKb5A"/>
+    <elementParameter field="CHECK" name="PARALLELIZE" value="true"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="16"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -843,7 +839,7 @@
     <elementParameter field="TEXT" name="USER" value="&quot;RETAIL_DW&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="QZzeDh88UbDfNBxh3xQ2mA=="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;FACTINVENTORY_REJECTS&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" show="false" value="TRUNCATE"/>
     <elementParameter field="LABEL" name="NOTE" show="false" value="Warning : this component configuration will automatically generate a commit before data insert/update/delete"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
@@ -1155,10 +1151,8 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="480">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="18" offsetLabelY="0" posX="192" posY="832">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_4"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_YPDwEJ6nEeiuishMaFKb5A"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" show="false" value=""/>
     <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID"/>
@@ -1214,23 +1208,23 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="Inventory_SqlServer"/>
   </connection>
-  <connection connectorName="FLOW" label="FactInventory_SqlServer_Output" lineStyle="0" metaname="FactInventory_SqlServer_Output" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tDBOutput_1">
+  <connection connectorName="FLOW" label="FactInventory_SqlServer_Output" lineStyle="0" metaname="FactInventory_SqlServer_Output" offsetLabelX="14" offsetLabelY="50" outputId="1" source="tMap_1" target="tDBOutput_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactInventory_SqlServer_Output"/>
   </connection>
-  <connection connectorName="FLOW" label="FactInventory_Rejects_SqlServer_Output" lineStyle="0" metaname="FactInventory_Rejects_SqlServer_Output" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tDBOutput_2">
+  <connection connectorName="FLOW" label="FactInventory_Rejects_SqlServer_Output" lineStyle="0" metaname="FactInventory_Rejects_SqlServer_Output" offsetLabelX="23" offsetLabelY="50" outputId="2" source="tMap_1" target="tDBOutput_2">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactInventory_Rejects_SqlServer_Output"/>
   </connection>
-  <connection connectorName="FLOW" label="DimStore_Oracle" lineStyle="8" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tMap_1">
+  <connection connectorName="FLOW" label="DimStore_Oracle" lineStyle="8" metaname="tDBInput_2" offsetLabelX="-11" offsetLabelY="32" source="tDBInput_2" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimStore_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimProduct_Oracle" lineStyle="8" metaname="tDBInput_3" offsetLabelX="0" offsetLabelY="0" source="tDBInput_3" target="tMap_1">
+  <connection connectorName="FLOW" label="DimProduct_Oracle" lineStyle="8" metaname="tDBInput_3" offsetLabelX="-7" offsetLabelY="36" source="tDBInput_3" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimProduct_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimGeography_Oracle" lineStyle="8" metaname="tDBInput_4" offsetLabelX="0" offsetLabelY="0" source="tDBInput_4" target="tMap_1">
+  <connection connectorName="FLOW" label="DimGeography_Oracle" lineStyle="8" metaname="tDBInput_4" offsetLabelX="-2" offsetLabelY="50" source="tDBInput_4" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimGeography_Oracle"/>
   </connection>
@@ -1244,13 +1238,13 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="91;132;151"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="206;225;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_5ed1e16e-00cb-4969-9847-5f75daff9239"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>Io01KVySEnS7o8edqLWDbS4ltvlE1YZniyk+mv/u1d3VAkg98st0UP1+E7XPntoxv5bDHWYfbO7L
-7MtY/wcjrg==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_8f738310-6ce8-4a6c-b167-6fc05891db27"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>9xSeNkfB4i5NNna1nWlLAA8yTuDrwJPSVZdKCdVmT3deRX8S3hMo79ITso6psGZXmRuRaM98E50K
-sQLxcxBIkw==</DigestValue></Reference></SignedInfo><SignatureValue>YTXqYejBuCtzEhB+GFsv079uzXDOROF+c7TzKmMQ57DkEnal/WeBUj0A2zN8w/R7g7GFV5mmg8u3
-D38LQHPWeYOG/NyLLYBR23Vi574APC9DX7y3NqoITk2P351Et7qOlpIi2LMMeo2DhpToxUjpeQPv
-igRrgHBfSi166mMtkMKNP2BHW7JFxn43hryiM83G5HnHwHdlLc0x/vwcWRtJP4+ohZt2tf67G57s
-GICiyKpa3BmvA2pvvkuJWuFaSJoEzC09QItMe6zAnHpOZfTssrziEPxBOAVke33ANA5kZfaKUUxM
-XVU+8PdMvtezQatV9XFOje7kos9SwZK9eQ1QzA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=Default code-signing certificate,OU=R&amp;D,O=Talend Inc.,ST=Paris,C=FR</X509SubjectName><X509Certificate>MIIFYzCCA0ugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBjTELMAkGA1UEBhMCRlIxDjAMBgNVBAgM
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_0c91efc0-1901-48bc-bb2b-e07caeb2421f"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>JJDM17iDRKGBi9aAM04IyAwFrt9wlChuTGlAjR8JnaK4XIyCzihZhRinY3dNjAKbCe2mzq1tGXJZ
+rNsoLM72uA==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f54cac11-ba56-4b71-b39a-1383030301b5"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>wsR8wloeLFC4mXFaYFACrWeW0Nott3lqLDsyBCdHC1J2AZ69dFAZ1NpzIJPmJTWoQ+fSfIREEo8b
+JYtwYzqJeg==</DigestValue></Reference></SignedInfo><SignatureValue>Baes8uoKOVEU3N+QoAs3oKCKAJGYyT5jG+xDkKya80eU0x3hn6CKNgap1hv2+PXSa3o1QTSe6rPY
+xQ7x8SjwIKj2rXKV2fxHVUyHAlhCRGHCRl434it3+MLlftOg2H+TPHtjLlDlRQ549ZkJ6oN7ueP8
+03qQBPujnPGg/jb0e61N9QHTIpKdf4DeDCfqSdau4pNOrR6tHWV+NwpvSyyevQ4VElSEu73qjdaq
+WM7/z9D3RczMT3B4jljShjT1BPnjYsk7BuMKTlHVaEdo0TT7io5ppup2pSoIMS8tJiU4nsuKTu+s
+7YO3U5uBxdOZ6zECI94CfG+h3FkEk30nLTnX1w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=Default code-signing certificate,OU=R&amp;D,O=Talend Inc.,ST=Paris,C=FR</X509SubjectName><X509Certificate>MIIFYzCCA0ugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBjTELMAkGA1UEBhMCRlIxDjAMBgNVBAgM
 BVBhcmlzMQ4wDAYDVQQHDAVQYXJpczEUMBIGA1UECgwLVGFsZW5kIEluYy4xDDAKBgNVBAsMA1Im
 RDEWMBQGA1UEAwwNVGFsZW5kIFImRCBDQTEiMCAGCSqGSIb3DQEJARYTc2VjdXJpdHlAdGFsZW5k
 LmNvbTAeFw0xODAxMTgwMDA2MTJaFw0yMTAxMTcwMDA2MTJaMGwxCzAJBgNVBAYTAkZSMQ4wDAYD
@@ -1274,4 +1268,4 @@ r3/fbKJ02Ni9kCnkY8wQS1yn45UNl1woSjryza4f4uLKGkrrIsUPXK+Vy4A1Il8XgFfmrtgA8m9s
 EHyu0OyAJH/agWN+GLhF/ssp26oXhiYqTkG4sQtNRFQG0isaYf/JWSt3f8Q+7/pnZpz4mfEAFimI
 BBLzRwDA6x9qqOn0RXxBo9pH16EO3SXPLR64cJum8B/RI/i8H6OkQDO1tEiE6UeceZk++U7fnD3c
 6i9Km85GTgQi6REsVZGIL/tZNIzN//qPwi7cDo3Cf/xmPrIKQhHJaxCqmbjGDmC8AXOaqNfWotVX
-Wy2dcglW62PDszE/HKh9</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_8f738310-6ce8-4a6c-b167-6fc05891db27" Target="#_5ed1e16e-00cb-4969-9847-5f75daff9239"><Timestamp>2018-08-14 21:58:55</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+Wy2dcglW62PDszE/HKh9</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f54cac11-ba56-4b71-b39a-1383030301b5" Target="#_0c91efc0-1901-48bc-bb2b-e07caeb2421f"><Timestamp>2018-08-17 02:37:54</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>

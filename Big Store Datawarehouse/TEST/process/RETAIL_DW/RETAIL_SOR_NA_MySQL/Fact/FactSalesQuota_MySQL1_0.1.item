@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><talendfile:ProcessType xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultContext="Default" jobType="Standard" xmi:version="2.0">
   <context confirmationNeeded="false" name="Default"/>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" show="false" value="{&quot;JOB_RUN_VM_ARGUMENTS&quot;:[&quot;-Xms8G&quot;,&quot;-Xmx14G&quot;]}"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" show="false" value="{&quot;JOB_RUN_VM_ARGUMENTS&quot;:[&quot;-Xms12G&quot;,&quot;-Xmx16G&quot;]}"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" show="false" value="true"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" show="false" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" show="false" value="0"/>
@@ -114,7 +114,7 @@
     <routinesParameter id="_eIqccGhcEeih1JsJ5LLV_w" name="TalendStringUtil"/>
     <routinesParameter id="_eIW6dmhcEeih1JsJ5LLV_w" name="TalendString"/>
   </parameters>
-  <node componentName="CNTL_Job_Tracking_Stats_CHILD" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="640" posY="32">
+  <node componentName="CNTL_Job_Tracking_Stats_CHILD" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="832">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="CNTL_Job_Tracking_Stats_CHILD_1"/>
     <elementParameter field="TEXT" name="FAMILY" value="Joblets"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -128,7 +128,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
   </node>
-  <node componentName="tMysqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="160">
+  <node componentName="tMysqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_7"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_0lmZsJ9pEeiyDOV15rR4zQ"/>
@@ -146,7 +146,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" show="false" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  `factsalesquota`.`SalesQuotaSK`, &#10;  `factsalesquota`.`SalesQuotaKey`, &#10;  `factsalesquota`.`ChannelKey`, &#10;  `factsalesquota`.`StoreID`, &#10;  `factsalesquota`.`STOREKEY`, &#10;  `factsalesquota`.`ProductLabel`, &#10;  `factsalesquota`.`Brand_ID`, &#10;  `factsalesquota`.`product_id`, &#10;  `factsalesquota`.`QuotaDate`, &#10;  `factsalesquota`.`CurrencyKey`, &#10;  `factsalesquota`.`ContinentCode`, &#10;  `factsalesquota`.`GeographyKey`, &#10;  `factsalesquota`.`ScenarioKey`, &#10;  `factsalesquota`.`SalesQuantityQuota`, &#10;  `factsalesquota`.`GrossMarginPctQuota`, &#10;  `factsalesquota`.`SalesAmountQuota`, &#10;  `factsalesquota`.`GrossMarginQuota`, &#10;  `factsalesquota`.`ETLLoadID`, &#10;  `factsalesquota`.`LoadDate`, &#10;  `factsalesquota`.`UpdateDate`&#10;FROM `factsalesquota`&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#10;  `factsalesquota`.`SalesQuotaKey`, &#10;  `factsalesquota`.`ChannelKey`, &#10;  `factsalesquota`.`StoreID`, &#10;  `factsalesquota`.`STOREKEY`, &#10;  `factsalesquota`.`ProductLabel`, &#10;  `factsalesquota`.`Brand_ID`, &#10;  `factsalesquota`.`product_id`, &#10;  `factsalesquota`.`QuotaDate`, &#10;  `factsalesquota`.`CurrencyKey`, &#10;  `factsalesquota`.`ScenarioKey`, &#10;  `factsalesquota`.`SalesQuantityQuota`, &#10;  `factsalesquota`.`GrossMarginPctQuota`, &#10;  `factsalesquota`.`SalesAmountQuota`, &#10;  `factsalesquota`.`LoadDate`, &#10;  `factsalesquota`.`UpdateDate`&#10;FROM `factsalesquota`&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" show="false" value="&quot;&quot;"/>
@@ -154,11 +154,9 @@
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="ENABLE_STREAM" value="false"/>
+    <elementParameter field="CHECK" name="ENABLE_STREAM" value="true"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="true"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN" show="false">
-      <elementValue elementRef="SCHEMA_COLUMN" value="SalesQuotaSK"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="SalesQuotaKey"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="ChannelKey"/>
@@ -177,10 +175,6 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="CurrencyKey"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ContinentCode"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="GeographyKey"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="ScenarioKey"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="SalesQuantityQuota"/>
@@ -188,10 +182,6 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="GrossMarginPctQuota"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="SalesAmountQuota"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="GrossMarginQuota"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ETLLoadID"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="LoadDate"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -201,7 +191,6 @@
     <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBInput_7">
-      <column comment="" defaultValue="" key="false" length="11" name="SalesQuotaSK" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="11" name="SalesQuotaKey" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="11" name="ChannelKey" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="11" name="StoreID" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
@@ -211,20 +200,16 @@
       <column comment="" key="false" length="24" name="product_id" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="10" name="QuotaDate" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="11" name="CurrencyKey" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="2" name="ContinentCode" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="11" name="GeographyKey" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="11" name="ScenarioKey" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="11" name="SalesQuantityQuota" nullable="false" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="10" name="GrossMarginPctQuota" nullable="false" originalLength="-1" pattern="" precision="4" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="15" name="SalesAmountQuota" nullable="false" originalLength="-1" pattern="" precision="2" sourceType="DECIMAL" type="id_Double" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="15" name="GrossMarginQuota" nullable="false" originalLength="-1" pattern="" precision="2" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="11" name="ETLLoadID" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="19" name="LoadDate" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="19" name="UpdateDate" nullable="true" originalLength="-1" pattern="" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
       <additionalProperties key="Comment" value=""/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="640" posY="160">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="8" offsetLabelY="-10" posX="832" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -381,9 +366,9 @@
       </column>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
-      <outputTables activateExpressionFilter="true" minimized="true" name="FactSalesQuota_Oracle_Output" sizeState="INTERMEDIATE">
+      <outputTables activateExpressionFilter="true" name="FactSalesQuota_Oracle_Output" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="SalesQuota_MySQL.SalesQuotaKey" name="SALESQUOTAKEY" type="id_Integer"/>
         <mapperTableEntries expression="DimChannel_Oracle.CHANNELSK" name="CHANNELSK" type="id_Integer"/>
         <mapperTableEntries expression="DimStore_Oracle.STORESK" name="STORESK" type="id_Integer"/>
@@ -398,7 +383,7 @@
         <mapperTableEntries expression="DimCurrency_Oracle.CURRENCYSK " name="LOCAL_CURRENCYSK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.SalesAmountQuota " name="SALESAMOUNTQUOTA_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="SalesQuota_MySQL.GrossMarginPctQuota " name="GROSSMARGINPCTQUOTA_LOCAL" type="id_BigDecimal"/>
-        <mapperTableEntries expression="3" name="SOR_ID" type="id_Integer"/>
+        <mapperTableEntries expression="317" name="SOR_ID" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.LoadDate " name="SOR_LOADDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="SalesQuota_MySQL.UpdateDate " name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="context.getProperty(&quot;vChildPID&quot;)" name="DI_JOBID" type="id_String"/>
@@ -420,13 +405,13 @@
         <mapperTableEntries expression="DimCurrency_Oracle.CURRENCYSK " name="LOCAL_CURRENCYSK" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.SalesAmountQuota" name="SALESAMOUNTQUOTA_LOCAL" nullable="true" type="id_Double"/>
         <mapperTableEntries expression="SalesQuota_MySQL.GrossMarginPctQuota " name="GROSSMARGINPCTQUOTA_LOCAL" type="id_BigDecimal"/>
-        <mapperTableEntries expression="" name="DI_REJECT_CODE" nullable="true" type="id_Integer"/>
+        <mapperTableEntries expression="((DimChannel_Oracle.CHANNELSK == 0 || Relational.ISNULL(DimChannel_Oracle.CHANNELSK)) ?10:&#13;&#10;( &#13;&#10;&#9;(DimProduct_Oracle.PRODUCTSK == 0 || Relational.ISNULL(DimProduct_Oracle.PRODUCTSK)) ?30:&#13;&#10;&#9;( &#13;&#10;&#9;&#9;(DimScenario_Oracle.SCENARIOSK == 0 | Relational.ISNULL(DimScenario_Oracle.SCENARIOSK)) ?50: 99&#13;&#10;&#9;&#9;)&#13;&#10;&#9;)&#13;&#10;) " name="DI_REJECT_CODE" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.ChannelKey" name="CHANNELKEY" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.StoreID" name="STOREID" nullable="true" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.ProductLabel" name="PRODUCTLABEL" nullable="true" type="id_String"/>
         <mapperTableEntries expression="SalesQuota_MySQL.Brand_ID" name="BRAND_ID" nullable="true" type="id_String"/>
         <mapperTableEntries expression="SalesQuota_MySQL.product_id" name="PRODUCT_ID" nullable="true" type="id_String"/>
-        <mapperTableEntries expression="3" name="SOR_ID" type="id_Integer"/>
+        <mapperTableEntries expression="317" name="SOR_ID" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.LoadDate " name="SOR_LOADDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="SalesQuota_MySQL.UpdateDate " name="SOR_UPDATEDATE" nullable="true" type="id_Date"/>
         <mapperTableEntries expression="context.getProperty(&quot;vChildPID&quot;)" name="DI_JOBID" type="id_String"/>
@@ -434,7 +419,6 @@
         <mapperTableEntries expression="TalendDate.getCurrentDate()" name="DI_MODIFIEDDATE" type="id_Date"/>
       </outputTables>
       <inputTables activateColumnNameFilter="true" columnNameFilter="" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="SalesQuota_MySQL" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="SalesQuotaSK" type="id_Integer"/>
         <mapperTableEntries name="SalesQuotaKey" type="id_Integer"/>
         <mapperTableEntries name="ChannelKey" type="id_Integer"/>
         <mapperTableEntries name="StoreID" nullable="true" type="id_Integer"/>
@@ -444,43 +428,39 @@
         <mapperTableEntries name="product_id" nullable="true" type="id_String"/>
         <mapperTableEntries name="QuotaDate" type="id_Date"/>
         <mapperTableEntries name="CurrencyKey" type="id_Integer"/>
-        <mapperTableEntries name="ContinentCode" nullable="true" type="id_String"/>
-        <mapperTableEntries name="GeographyKey" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="ScenarioKey" type="id_Integer"/>
         <mapperTableEntries name="SalesQuantityQuota" type="id_Integer"/>
         <mapperTableEntries name="GrossMarginPctQuota" type="id_BigDecimal"/>
         <mapperTableEntries name="SalesAmountQuota" type="id_Double"/>
-        <mapperTableEntries name="GrossMarginQuota" type="id_BigDecimal"/>
-        <mapperTableEntries name="ETLLoadID" nullable="true" type="id_Integer"/>
         <mapperTableEntries name="LoadDate" nullable="true" type="id_Date"/>
         <mapperTableEntries name="UpdateDate" nullable="true" type="id_Date"/>
+      </inputTables>
+      <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimChannel_Oracle" sizeState="INTERMEDIATE">
+        <mapperTableEntries expression="" name="CHANNELSK" type="id_Integer"/>
+        <mapperTableEntries expression="SalesQuota_MySQL.ChannelKey " name="CHANNELKEY" type="id_Integer"/>
       </inputTables>
       <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimProduct_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="" name="PRODUCTSK" type="id_Integer"/>
         <mapperTableEntries name="PRODUCT_ID" type="id_String"/>
-        <mapperTableEntries expression="" name="BRAND_ID" type="id_String"/>
-        <mapperTableEntries expression="SalesQuota_MySQL.ProductLabel " name="PRODUCTLABEL" type="id_String"/>
+        <mapperTableEntries expression="SalesQuota_MySQL.Brand_ID " name="BRAND_ID" type="id_String"/>
+        <mapperTableEntries expression="" name="PRODUCTLABEL" type="id_String"/>
       </inputTables>
-      <inputTables activateCondensedTool="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimStore_Oracle" sizeState="INTERMEDIATE">
+      <inputTables activateCondensedTool="true" activateExpressionFilter="true" innerJoin="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimScenario_Oracle" sizeState="INTERMEDIATE">
+        <mapperTableEntries name="SCENARIOSK" type="id_Integer"/>
+        <mapperTableEntries expression="SalesQuota_MySQL.ScenarioKey " name="SCENARIOKEY" operator="=" type="id_Integer"/>
+      </inputTables>
+      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DimStore_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries name="STORESK" type="id_Integer"/>
         <mapperTableEntries name="STOREID" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.STOREKEY " name="STOREKEY" operator="=" type="id_Integer"/>
       </inputTables>
-      <inputTables activateCondensedTool="true" activateExpressionFilter="true" expressionFilter="DimScenario_Oracle.SCENARIOKEY==1" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimScenario_Oracle" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="SCENARIOSK" type="id_Integer"/>
-        <mapperTableEntries expression="SalesQuota_MySQL.ScenarioKey " name="SCENARIOKEY" operator="=" type="id_Integer"/>
-      </inputTables>
-      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimChannel_Oracle" sizeState="INTERMEDIATE">
-        <mapperTableEntries expression="" name="CHANNELSK" type="id_Integer"/>
-        <mapperTableEntries expression="SalesQuota_MySQL.ChannelKey " name="CHANNELKEY" type="id_Integer"/>
-      </inputTables>
-      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" minimized="true" name="DimCurrency_Oracle" sizeState="INTERMEDIATE">
+      <inputTables activateCondensedTool="true" lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DimCurrency_Oracle" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="" name="CURRENCYSK" type="id_Integer"/>
         <mapperTableEntries expression="SalesQuota_MySQL.CurrencyKey " name="CURRENCYKEY" type="id_Integer"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="320">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="832">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_2"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
@@ -540,7 +520,7 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="480">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="608">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_3"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
@@ -605,7 +585,7 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="704">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_4"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
@@ -660,7 +640,7 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="576">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1248" posY="864">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_5"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
@@ -715,7 +695,7 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="768">
+  <node componentName="tOracleInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="1056">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_6"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
@@ -770,10 +750,10 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1440" posY="32">
+  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1728" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_3"/>
     <elementParameter field="CHECK" name="PARALLELIZE" value="true"/>
-    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="16"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="4"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
@@ -803,7 +783,7 @@
     <elementParameter field="LABEL" name="NOTE" value="*Note: Example for Additional JDBC Parameters: &quot;parameterName1=value1&amp;&amp;parameterName2=value2&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="200000"/>
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
@@ -914,7 +894,7 @@
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="CHECK" name="USE_BATCH_AND_USE_CONN" show="false" value="false"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="200000"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
     <elementParameter field="CHECK" name="USE_TIMESTAMP_FOR_DATE_TYPE" value="true"/>
     <elementParameter field="CHECK" name="TRIM_CHAR" value="true"/>
@@ -1047,10 +1027,10 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" originalLength="-1" precision="0" sourceType="VARCHAR2" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1440" posY="288">
+  <node componentName="tOracleOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1728" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBOutput_2"/>
     <elementParameter field="CHECK" name="PARALLELIZE" value="true"/>
-    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="16"/>
+    <elementParameter field="TEXT" name="PARALLELIZE_NUMBER" value="4"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" show="false" value="_WpgxwJ6rEeiSXeAReZAEyg"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
@@ -1080,7 +1060,7 @@
     <elementParameter field="LABEL" name="NOTE" value="*Note: Example for Additional JDBC Parameters: &quot;parameterName1=value1&amp;&amp;parameterName2=value2&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" show="false" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="200000"/>
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
@@ -1221,7 +1201,7 @@
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="CHECK" name="USE_BATCH_AND_USE_CONN" show="false" value="false"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="200000"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
     <elementParameter field="CHECK" name="USE_TIMESTAMP_FOR_DATE_TYPE" value="true"/>
     <elementParameter field="CHECK" name="TRIM_CHAR" value="true"/>
@@ -1394,23 +1374,23 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="SalesQuota_MySQL"/>
   </connection>
-  <connection connectorName="FLOW" label="FactSalesQuota_Oracle_Output" lineStyle="0" metaname="FactSalesQuota_Oracle_Output" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_1" target="tDBOutput_3">
+  <connection connectorName="FLOW" label="FactSalesQuota_Oracle_Output" lineStyle="0" metaname="FactSalesQuota_Oracle_Output" offsetLabelX="-2" offsetLabelY="40" outputId="1" source="tMap_1" target="tDBOutput_3">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactSalesQuota_Oracle_Output"/>
   </connection>
-  <connection connectorName="FLOW" label="FactSalesQuota_Rejects_Oracle_output" lineStyle="0" metaname="FactSalesQuota_Rejects_Oracle_output" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_1" target="tDBOutput_2">
+  <connection connectorName="FLOW" label="FactSalesQuota_Rejects_Oracle_output" lineStyle="0" metaname="FactSalesQuota_Rejects_Oracle_output" offsetLabelX="50" offsetLabelY="50" outputId="2" source="tMap_1" target="tDBOutput_2">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="FactSalesQuota_Rejects_Oracle_output"/>
   </connection>
-  <connection connectorName="FLOW" label="DimStore_Oracle" lineStyle="8" metaname="tDBInput_2" offsetLabelX="0" offsetLabelY="0" source="tDBInput_2" target="tMap_1">
+  <connection connectorName="FLOW" label="DimStore_Oracle" lineStyle="8" metaname="tDBInput_2" offsetLabelX="5" offsetLabelY="29" source="tDBInput_2" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimStore_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimProduct_Oracle" lineStyle="8" metaname="tDBInput_3" offsetLabelX="0" offsetLabelY="0" source="tDBInput_3" target="tMap_1">
+  <connection connectorName="FLOW" label="DimProduct_Oracle" lineStyle="8" metaname="tDBInput_3" offsetLabelX="0" offsetLabelY="25" source="tDBInput_3" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimProduct_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimChannel_Oracle" lineStyle="8" metaname="tDBInput_4" offsetLabelX="0" offsetLabelY="0" source="tDBInput_4" target="tMap_1">
+  <connection connectorName="FLOW" label="DimChannel_Oracle" lineStyle="8" metaname="tDBInput_4" offsetLabelX="-2" offsetLabelY="18" source="tDBInput_4" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimChannel_Oracle"/>
   </connection>
@@ -1418,7 +1398,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimCurrency_Oracle"/>
   </connection>
-  <connection connectorName="FLOW" label="DimScenario_Oracle" lineStyle="8" metaname="tDBInput_6" offsetLabelX="0" offsetLabelY="0" source="tDBInput_6" target="tMap_1">
+  <connection connectorName="FLOW" label="DimScenario_Oracle" lineStyle="8" metaname="tDBInput_6" offsetLabelX="11" offsetLabelY="30" source="tDBInput_6" target="tMap_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="DimScenario_Oracle"/>
   </connection>
@@ -1428,17 +1408,19 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" show="false" value="tDBInput_7"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" show="false" value="92;131;150"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="SalesQuota"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_d39a30ee-0109-4f10-8549-29a9bebb21a2"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>CuSVwFqXf9CYjvE2lRr1LyO2i9cTC/7o4zarR2e64ELfWh73qjw0NSmTtO44N06/zioHPa4a4IDY
-tXFK5peK1Q==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_13dcefae-9c67-4fb7-ab6e-5cd99975a1dd"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>TcvwO0e2+EkzRITEdtQhtG5IytSpFqSudpB4CdHfu6Egj/2drJW5X88oPP1aYxk5xBx6HzaQTZTj
-PxU6v1lmlw==</DigestValue></Reference></SignedInfo><SignatureValue>ZbYVTFBqRGMHz677OBSqGndh1H2kTn5mvIvHqWP5Y7dRs6wxwkK9fO+pfo/RoM9cbb4jCdBlx/iy
-t3FdiuoyrLyseyPr3byp6RZhA49Tvvsq9aaW2nruA7IFIM/Y0WqnBMpSBQuZEOMOOg0BeJATSfI+
-dnqnfWoNaYJtVakFUuBFZFRGwDhMMlajnbAJf4V8IGminVyAmQiYdHlGtECJ6HbikL5hb4l46uaN
-JHBMY6+0cUwS3vo1umI2eMAnadUfvFGEE/QAJo/B7s2i/4RDMoTWZw3vqhluU3xbGFdojBk/5Gbl
-3huaR79oF0/WP1hLDZ15BLXqUntyvqQJdj4W0Q==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=Default code-signing certificate,OU=R&amp;D,O=Talend Inc.,ST=Paris,C=FR</X509SubjectName><X509Certificate>MIIFYzCCA0ugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBjTELMAkGA1UEBhMCRlIxDjAMBgNVBAgM
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="_dce88cb0-70c0-4302-b416-90ceab44d1af"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>FqjzZVKDAnZG0jHsg9gpEOx5Y2xzIjZ+Or/cjV0tFLD9YQyu4WsGSyrWd9D+kcfdEkfsr7/gY9AW
+x3D0C7gF6A==</DigestValue></Reference><Reference Type="http://www.w3.org/2000/09/xmldsig#SignatureProperties" URI="#_f2d3685b-77f8-43e3-9564-782bc1073eac"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/><DigestValue>dXJSGgUhquTg5ITqhBHZX/DNDLguL7w8xDFLTNeYdlWAVHBT54HgSezqAs38nfCs8j0NmJIMfhCL
+QnO4dH/fqA==</DigestValue></Reference></SignedInfo><SignatureValue>dvRx6nYt9jOMvhivIY7jDqyQ6otX8xQlIL8TMWmIlpY5wB0o7K8rHlxB0SL/2W6/GuFn/Vj1x457
+YwBhYkvvBVCn7Rlr82j8axHZ6i6tNFlH27aLtM8LpoXPHt9QSxnKgX+P9Jx6g34AdjeIMGY0bzUU
+jDp6ppNFUwcwCJ4nocEOiy+6XVNid7coPjc6/3m62t9ZczzRHN8Nh8h+0Ev/xvdDviHMgKzPAsN5
+bGYWZA+bcy0TyKYel61iXlXDbm4NUCnJ3soFZZhdsu8YDX3uZQDKDcYL24Yx3eeKnI8w4Q8gfq9p
+HE390X/gJVSS7K83z4jwDIC97C5sboIqaRJM7w==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=Default code-signing certificate,OU=R&amp;D,O=Talend Inc.,ST=Paris,C=FR</X509SubjectName><X509Certificate>MIIFYzCCA0ugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBjTELMAkGA1UEBhMCRlIxDjAMBgNVBAgM
 BVBhcmlzMQ4wDAYDVQQHDAVQYXJpczEUMBIGA1UECgwLVGFsZW5kIEluYy4xDDAKBgNVBAsMA1Im
 RDEWMBQGA1UEAwwNVGFsZW5kIFImRCBDQTEiMCAGCSqGSIb3DQEJARYTc2VjdXJpdHlAdGFsZW5k
 LmNvbTAeFw0xODAxMTgwMDA2MTJaFw0yMTAxMTcwMDA2MTJaMGwxCzAJBgNVBAYTAkZSMQ4wDAYD
@@ -1462,4 +1444,4 @@ r3/fbKJ02Ni9kCnkY8wQS1yn45UNl1woSjryza4f4uLKGkrrIsUPXK+Vy4A1Il8XgFfmrtgA8m9s
 EHyu0OyAJH/agWN+GLhF/ssp26oXhiYqTkG4sQtNRFQG0isaYf/JWSt3f8Q+7/pnZpz4mfEAFimI
 BBLzRwDA6x9qqOn0RXxBo9pH16EO3SXPLR64cJum8B/RI/i8H6OkQDO1tEiE6UeceZk++U7fnD3c
 6i9Km85GTgQi6REsVZGIL/tZNIzN//qPwi7cDo3Cf/xmPrIKQhHJaxCqmbjGDmC8AXOaqNfWotVX
-Wy2dcglW62PDszE/HKh9</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_13dcefae-9c67-4fb7-ab6e-5cd99975a1dd" Target="#_d39a30ee-0109-4f10-8549-29a9bebb21a2"><Timestamp>2018-08-16 06:22:09</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
+Wy2dcglW62PDszE/HKh9</X509Certificate></X509Data></KeyInfo><Object><SignatureProperties><SignatureProperty Id="_f2d3685b-77f8-43e3-9564-782bc1073eac" Target="#_dce88cb0-70c0-4302-b416-90ceab44d1af"><Timestamp>2018-08-17 19:23:12</Timestamp></SignatureProperty></SignatureProperties></Object></Signature></talendfile:ProcessType>
