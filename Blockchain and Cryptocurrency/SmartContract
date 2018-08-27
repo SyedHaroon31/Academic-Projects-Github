@@ -1,0 +1,56 @@
+//Hajcoin_ICO
+
+//version of compiler
+pragma solidity ^0.4.7;
+
+contract hajcoin_ico{
+    
+    //Introducing the total number of Hajcoin available for sale
+    uint public max_hajcoins = 1000000;
+    
+    //Introducing conversion rate between USD and Hajcoin
+    uint public usd_to_hajcoins = 1000;
+    
+    //Introducing the total number of hajcoins that have been bought by investors
+    uint public total_hajcoins_bought = 0;
+    
+    //mapping from the investor address to its entity in Hajcoin and USD both
+    mapping(address => uint) equity_hajcoins;
+    mapping(address => uint) equity_usd;
+    
+    //Checking if an investor can buy hajcoins
+    //require checks if condition is true
+    modifier can_buy_hajcoins(uint usd_invested) {
+        require(usd_invested * usd_to_hajcoins + total_hajcoins_bought <= max_hajcoins);
+        _;
+    }
+    
+    
+    //Getting the equity in Hajcoins of an investor
+    function equity_in_hajcoins(address investor) external constant returns (uint){
+        return equity_hajcoins[investor];
+        }
+    
+    //Getting the equity in USD of an investor
+    function equity_in_USD(address investor) external constant returns (uint){
+        return equity_usd[investor];
+        }
+    
+    //Buying Hajcoins
+    function buy_hajcoins(address investor,uint usd_invested) external
+    can_buy_hajcoins(usd_invested){
+        uint hajcoins_bought = usd_invested * usd_to_hajcoins;
+        equity_hajcoins[investor] += hajcoins_bought;
+        equity_usd[investor] = equity_hajcoins[investor] / 1000;
+        total_hajcoins_bought += hajcoins_bought;
+    }
+    
+    //Selling Hajcoins
+       function sell_hajcoins(address investor, uint hajcoins_sold) external {
+        equity_hajcoins[investor] -= hajcoins_sold;
+        equity_usd[investor] = equity_hajcoins[investor] / usd_to_hajcoins;
+        total_hajcoins_bought -= hajcoins_sold;
+    }
+   
+    
+}
