@@ -1,4 +1,4 @@
-Performed Analysis on Amazon Stock and built various predictive models and built trading Strategies
+Performed Analysis on Amazon Stock and built various predictive models and built Trading Strategies using Python3
 
 The models incorportated are as follows:
 
