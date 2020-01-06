@@ -1,11 +1,17 @@
 Performed Analysis on Amazon Stock and built various predictive models and built trading Strategies
 
 The models incorportated are as follows:
+
 1.Garch
+
 2.Kalman Filter
+
 3.Mixed Data Sampling (Midas)
+
 4.Moving Average
+
 5.Random Forest
+
 6.Ensemble Model using Random forest ( Autoregression, Fama French Regression, Moving Average)
 
 The Trading Strategies were:
