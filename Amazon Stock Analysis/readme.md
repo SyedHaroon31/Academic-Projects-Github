@@ -8,6 +8,8 @@ The models incorportated are as follows:
 
 3. Mixed Data Sampling (Midas)
 
+Note: Mixed Data Sampling was infered from https://github.com/mikemull/midaspy
+
 4. Moving Average
 
 5. Random Forest
@@ -26,5 +28,3 @@ The Trading Strategies were:
 
 
 
-
-Note: Mixed Data Sampling was infered from https://github.com/mikemull/midaspy
