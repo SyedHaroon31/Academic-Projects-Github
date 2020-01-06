@@ -25,3 +25,6 @@ The Trading Strategies were:
       - If predicted > yesterday’s close price -> buy it at open and sell at close 
 
 
+
+
+Note: Mixed Data Sampling was infered from https://github.com/mikemull/midaspy
