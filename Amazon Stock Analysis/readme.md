@@ -25,6 +25,10 @@ The Trading Strategies were:
       - If predicted > yesterday’s close price -> go long  else go short 
 3. Day/Month/Quater Trading 
       - If predicted > yesterday’s close price -> buy it at open and sell at close 
+      
+      
+      
+PLEASE REFER PDF FOR UNDERSTANDING
 
 
 
