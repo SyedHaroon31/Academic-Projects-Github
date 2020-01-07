@@ -2,17 +2,19 @@ Performed Analysis on Amazon Stock and built various predictive models and built
 
 The models incorportated are as follows:
 
-1.Garch
+1. Garch
 
-2.Kalman Filter
+2. Kalman Filter
 
-3.Mixed Data Sampling (Midas)
+3. Mixed Data Sampling (Midas)
 
-4.Moving Average
+Note: Mixed Data Sampling was infered from https://github.com/mikemull/midaspy
 
-5.Random Forest
+4. Moving Average
 
-6.Ensemble Model using Random forest ( Autoregression, Fama French Regression, Moving Average)
+5. Random Forest
+
+6. Ensemble Model combination using Random forest ( Autoregression, Fama French Regression, Moving Average)
 
 The Trading Strategies were:
 1. Buy and hold 
@@ -23,5 +25,6 @@ The Trading Strategies were:
       - If predicted > yesterday’s close price -> go long  else go short 
 3. Day/Month/Quater Trading 
       - If predicted > yesterday’s close price -> buy it at open and sell at close 
+
 
 
